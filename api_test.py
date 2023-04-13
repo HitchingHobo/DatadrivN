@@ -1,5 +1,14 @@
 import pandas as pd
+import json
+from urllib.request import urlopen
 
-df = pd.read_json('2022.json')
 
-print(df.head(4))
+with urlopen("https://jobsearch.api.jobtechdev.se/search?q=distans&offset=0&limit=10") as webpage: # webpage is just a variable 
+   
+    #read JSON file & extract data  
+    data = json.loads(webpage.read().decode()) 
+   
+    # df: Data Fram
+    #df = pd.DataFrame(data)
+
+    print(data)
