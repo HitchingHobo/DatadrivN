@@ -47,8 +47,5 @@ values = data[0].values()
 print(type(values))
 
 
-
-print(search(data[0], 'och'))
-
 if any('och') in values:
     print()
