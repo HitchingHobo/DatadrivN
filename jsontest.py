@@ -30,14 +30,25 @@ dist_list = []
 x = 0
 
 
+def search(values, searchFor):
+    for k in values:
+        for v in values[k]:
+            if searchFor in v:
+                return k
+    return None
 
-for row in data:
-    print(data[row])
-    print(type(row))
-    if any("och") in row:
-        dist_list.append(row)
-        x += 1
-    
-print(dist_list)
-print(x)
 
+## Data = list
+## Data[0] = dict
+## Data[0] innehåller tuples
+
+values = data[0].values()
+## print(values)
+print(type(values))
+
+
+
+print(search(data[0], 'och'))
+
+if any('och') in values:
+    print()
