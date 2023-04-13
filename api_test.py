@@ -8,7 +8,6 @@ with urlopen("https://jobsearch.api.jobtechdev.se/search?q=distans&offset=0&limi
     #read JSON file & extract data  
     data = json.loads(webpage.read().decode()) 
    
-    # df: Data Fram
-    #df = pd.DataFrame(data)
-
     print(data)
+
+
