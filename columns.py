@@ -5,7 +5,7 @@ import pandas as pd
 jobtech_dataset = pd.read_json('2022.sample.json')
 print(jobtech_dataset.columns)
 print(jobtech_dataset.head(3))
-
+jobtech_dataset.to_csv('jobtech_dataset2022.csv') 
 ### samtliga kolumner i datasetet: ###
 #['id', 'external_id', 'webpage_url', 'logo_url', 'headline','application_deadline', 'number_of_vacancies', 'description',
 # 'employment_type', 'salary_type', 'salary_description', 'duration',
