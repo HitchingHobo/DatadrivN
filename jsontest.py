@@ -30,12 +30,12 @@ dist_list = []
 x = 0
 
 
-def search(values, searchFor):
-    for k in values:
-        for v in values[k]:
-            if searchFor in v:
-                return k
-    return None
+# def search(values, searchFor):
+#     for k in values:
+#         for v in values[k]:
+#             if searchFor in v:
+#                 return k
+#     return None
 
 
 ## Data = list
@@ -44,8 +44,20 @@ def search(values, searchFor):
 
 values = data[0].values()
 ## print(values)
-print(type(values))
+#print(type(values))
 
 
-if any('och') in values:
-    print()
+# Loop through list of dictionaries and search for "distans" in key description
+for i in range(len(data)):
+    for k in data[i].keys():
+        for v in data[i][k]:
+            if "distans" in v:
+                dist_list.append(data[i])
+                x += 1
+                break
+            else:
+                break
+
+print(dict_list)
+print(x)
+
