@@ -1,5 +1,5 @@
 import pandas as pd
-import json
+import csv
 
 # read first 1000 rows of csv file
 df = pd.read_csv('jobtech_dataset2022.csv', nrows=1000)
@@ -13,16 +13,11 @@ dist_list = []
 #         dist_list.append(row['description'])
 #         x +=1
 # print(x)
+# print(dist_list)
 
-# print each column title
-# for col in df.columns:
-#      print(col)
 
-# print workpalce_address for each row
-# for index, row in df.iterrows():
-#     print(type(['workplace_address']))
 
-a = []
+big_list = []
 
 for index, row in df.iterrows():
     b = row['workplace_address']
@@ -31,7 +26,7 @@ for index, row in df.iterrows():
     b = b.replace("'", '')
     b = b.strip()
 
-    a.append(b)
+    big_list.append(b)
     #print(b)
     #print(type(b))
 
@@ -39,16 +34,23 @@ for index, row in df.iterrows():
 
 
 
+# counting each city
 city_count = {}
 
-# count each occurance of word in list and add to dictionary
-for city in a:
+for city in big_list:
     if city in city_count:
         city_count[city] += 1
     else:
         city_count[city] = 1
 
-print(city_count)
+#print(city_count)
 
+header = ['city']
+
+with open('rensad_JBT.csv', 'w', encoding='UTF8') as f:
+    writer = csv.writer(f)
+    writer.writerow(header)
+    for item in big_list:
+        writer.writerow([item])
 
 
