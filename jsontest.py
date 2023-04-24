@@ -30,12 +30,12 @@ dist_list = []
 x = 0
 
 
-def search(values, searchFor):
-    for k in values:
-        for v in values[k]:
-            if searchFor in v:
-                return k
-    return None
+# def search(values, searchFor):
+#     for k in values:
+#         for v in values[k]:
+#             if searchFor in v:
+#                 return k
+#     return None
 
 
 ## Data = list
@@ -44,8 +44,8 @@ def search(values, searchFor):
 
 values = data[0].values()
 ## print(values)
-print(type(values))
+#print(type(values))
 
 
-if any('och') in values:
-    print()
+
+
