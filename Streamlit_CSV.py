@@ -9,6 +9,10 @@ st.title('Uber pickups in NYC')
 #DATA = 'jobtech_dataset2022.csv'
 DATA = 'rensad_JBT.csv'
 
+
+
+
+
 @st.cache_data
 
 def load_data(nrows):
@@ -19,8 +23,10 @@ def load_data(nrows):
 
 
 # data_load_state = st.text('Loading data...')
-data = load_data(1000)
+data = load_data(100)
 # data_load_state.text("Done! (using st.cache_data)")
+
+st.dataframe(data)
 
 if st.checkbox('Show raw data'):
     st.subheader('Raw data')
