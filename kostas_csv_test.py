@@ -13,7 +13,7 @@ pd.set_option('display.max_colwidth', None)
 data = data[ (data['description.text'].str.contains('utvecklare'))]
 print(data[['description.text', 'employer.name']])
 
-# print(data.info)
+print(data.info)
 # print(data.columns)
 
 # search for 'utvecklare' in description in dataframe
