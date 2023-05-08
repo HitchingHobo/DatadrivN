@@ -62,4 +62,3 @@ with open(r'2022.sample.jsonl', encoding=('UTF8')) as f:
 line_dicts = [json.loads(line) for line in lines]
 df_final = pd.DataFrame(line_dicts)
 
-print(df_final)
