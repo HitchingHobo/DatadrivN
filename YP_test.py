@@ -11,6 +11,10 @@ data.drop('ssyk', inplace=True, axis=1)
 data.drop('geografi', inplace=True, axis=1)
 data.drop('stycke3', inplace=True, axis=1)
 
+
+data = data[ (data['ar'] == 2022)]
+
+
 data = data.rename({'ingress':'Procent', 'stycke1':'Jobbmöjlighet', 'stycke2':'5 års sikt'}, axis='columns')
 
 print(data.head(4))
@@ -18,3 +22,5 @@ print(data.head(4))
 #########
 # Ta bort år 2026, varannan rad
 #########
+
+
