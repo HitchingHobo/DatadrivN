@@ -1,23 +1,23 @@
 import pandas as pd
-import csv
 
 
 data = pd.read_csv('jobtech_temp2022Rall_UPDATED.csv', 
                    encoding=('UTF8'), 
-                   nrows=100)
+                   nrows=1000)
 # data = data[['id', 'description.text', 'employer.name']]
 data.info()
 # data = pd.read_csv('jobtech_dataset2022.csv', encoding=('UTF8'), nrows=100)
 # data = data[['id', 'description', 'employer']]
 pd.set_option('display.max_colwidth', None)
 data = data[ (data['description.text'].str.contains('utvecklare', na=False))]
-print(data[['description.text', 'employer.name']])
+print(data[['occupation.label',  'employer.name']])
 
+
+print(data)
 # print(data.info)
 # print(data.columns)
 
 # search for 'utvecklare' in description in dataframe
-
 
 
 
