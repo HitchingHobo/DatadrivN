@@ -11,9 +11,6 @@ data = pd.read_csv('Lista Mask. och Fem. ord.csv', encoding=('UTF8'))
 mask_data = data['Maskulint kodade ord']
 fem_data = data['Feminint kodade ord']
 
-sentiment.lexicon = {}
-#sentiment.lexicon.clear()
-
 new_words = {}
 
 for word in mask_data:
