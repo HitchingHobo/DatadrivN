@@ -10,10 +10,10 @@ data.info()
 # data = data[['id', 'description', 'employer']]
 pd.set_option('display.max_colwidth', None)
 data = data[ (data['description.text'].str.contains('utvecklare', na=False))]
-print(data[['occupation.label',  'employer.name']])
+print(data[['occupation.label',  'employer.name', 'description.text']])
 
 
-print(data)
+
 # print(data.info)
 # print(data.columns)
 
