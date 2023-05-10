@@ -20,4 +20,4 @@ column_name = ["Titlar"] #The name of the columns
 with open('Utvecklare_lista.csv', 'a', encoding="UTF8") as f:
     writer = csv.writer(f) #this is the writer object
     writer.writerow(column_name) # this will list out the names of the columns which are always the first entrries
-    writer.writerow(data[ data["occupation.label", "employer.name", "description.text"]]) #this is the data
+    writer.writerows(data[["occupation.label", "employer.name", "description.text", ]]) #this is the data
