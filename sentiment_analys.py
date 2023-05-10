@@ -5,22 +5,19 @@ sentiment = SentimentIntensityAnalyzer()
 
 text_1 = ' Intellektuell Vi tror att du agerar relationsskapande i samarbetet med andra, är serviceinriktad och besitter ett stort intresse och en stor vilja att hjälpa andra. Du är tydlig i din kommunikation och har en förmåga att fatta snabba besluta' 
 text_1 = text_1.lower()
-#////////////////
+
 
 data = pd.read_csv('jobtech_temp2022Rall_UPDATED.csv', encoding=('UTF8'), nrows=1000)
 data = data[ (data['description.text'].str.contains('utvecklare', na=False))]
 data = data[['occupation.label',  'employer.name', 'description.text']]
 
 
-
-
-
-
-
-#////////////////
 gen_data = pd.read_csv('Lista Mask. och Fem. ord.csv', encoding=('UTF8'))
 mask_data = gen_data['Maskulint kodade ord']
+mask_data = mask_data.dropna()
 fem_data = gen_data['Feminint kodade ord']
+fem_data = fem_data.dropna()
+
 
 new_words = {}
 
@@ -57,16 +54,20 @@ print('Negative:',neg_word_list)
 from nltk.stem.snowball import SwedishStemmer
 stemmer = SwedishStemmer()
 
-text_1_stemmed = ''
-for i in text_1.split():
+## Svensk stemming
+# text_1_stemmed = ''
+# for i in text_1.split():
+#     i = stemmer.stem(i)
+#     text_1_stemmed = text_1_stemmed + ' ' + i
+
+# print(text_1_stemmed)
+
+
+# stemmar alla ord i mask_data och lägger i lista
+mask_data_stemmed = []
+
+for i in mask_data:
+    # stem word
     i = stemmer.stem(i)
-    text_1_stemmed = text_1_stemmed + ' ' + i
-
-print(text_1_stemmed)
-
-text_1_stemmed = ''    
-for i in text_1.split():
-    i = stemmer.stem(i)
-    text_1_stemmed = text_1_stemmed + ' ' + i
-
-print(text_1_stemmed)
+    # append word to list
+    mask_data_stemmed.append(i)
