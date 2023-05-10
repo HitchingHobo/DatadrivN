@@ -19,8 +19,3 @@ data = data.rename({'ingress':'Procent', 'stycke1':'Jobbmöjlighet', 'stycke2':'
 
 print(data.head(4))
 
-#########
-# Ta bort år 2026, varannan rad
-#########
-
-
