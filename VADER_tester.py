@@ -26,7 +26,6 @@ data = pd.read_csv('utvecklare_lista.csv',
                     encoding=('UTF8'),
                     nrows=20,)
 
-import pandas as pd
 pd.set_option('display.max_colwidth', None)
 sentence = 'Vi har logik stort engagemang för det individ intelligen vi gör och tar på stort allvar att vi utvecklar en produkt som har stor effekt för många. Detta samtidigt som vi driver utvecklingen framåt och har väldigt roligt'
 pos_word_list=[]
