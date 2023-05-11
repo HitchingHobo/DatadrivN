@@ -18,7 +18,7 @@ for row in gen_data['Feminint kodade ord']:
 
 data = pd.read_csv('utvecklare_lista.csv',
                     encoding=('UTF8'),
-                    nrows=3000,)
+                    nrows=100,)
 data.info()
 pos_word_list=[]
 neu_word_list=[]
@@ -42,23 +42,19 @@ for index in data.index:
     neg_word_list=[]
     
     for word in row.split():
-        for i in mask_list:
-            if word.startswith(i):
-                pos_word_list.append(word) 
-                #print(pos_word_list) 
-        if word in stopwords_list:
-            continue
-        elif len(word) <4:
-            continue
-        # elif word in combined:
-        #     pos_word_list.append(word)
-        #    print(pos_word_list)
-        elif word in fem_list:
-            neg_word_list.append(word)
+        if word not in stopwords_list:
+            for i in mask_list:
+                if word.startswith(i):
+                    pos_word_list.append(i) 
+                    print(pos_word_list)
+            for i in fem_list:
+                if word.startswith(i):
+                    neg_word_list.append(i)
+                    print(neg_word_list)
         else:
-            neu_word_list.append(word)
+            continue
     data['Mask_score'][index] = len(pos_word_list)
     data['Fem_score'][index] = len(neg_word_list)
 
 
-print(data)
+print(data.sort_values(by=['Mask_score']))
