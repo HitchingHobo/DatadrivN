@@ -7,9 +7,13 @@ text_1 = ' Intellektuell Vi tror att du agerar relationsskapande i samarbetet me
 text_1 = text_1.lower()
 
 
-data = pd.read_csv('jobtech_temp2022Rall_UPDATED.csv', encoding=('UTF8'), nrows=1000)
+data = pd.read_csv('utvecklare_lista.csv', encoding=('UTF8'), nrows=10)
 data = data[ (data['description.text'].str.contains('utvecklare', na=False))]
 data = data[['occupation.label',  'employer.name', 'description.text']]
+
+## Gör alla bokstäver små
+for i in data['occupation.label']:
+    data['description.text'] = data['description.text'].str.lower()
 
 
 gen_data = pd.read_csv('Lista Mask. och Fem. ord.csv', encoding=('UTF8'))
@@ -62,6 +66,15 @@ stemmer = SwedishStemmer()
 
 # print(text_1_stemmed)
 
+# stemmar all text
+for row in data['description.text']:
+    new_row=''
+    for i in row.split():
+        i = stemmer.stem(i)
+        new_row = new_row + ' ' + i
+        data['description.text'] = new_row
+
+print(data)
 
 # stemmar alla ord i mask_data och lägger i lista
 mask_data_stemmed = []
