@@ -13,7 +13,7 @@ with col1:
     st.subheader('Se hur könsneutral din annons är!')
     
     annons_input = st.text_input("Testa din annons här: ", "Klistra in här...")
-    st.write('Din annons har')
+    st.write('Din annons har...')
 with col2:
     st.subheader("Do's and dont's")
     st.text("Do's:")
@@ -23,6 +23,16 @@ with col2:
     st.text("Dont's")
 
 
+col3, col4 = st.columns(2)
+with col1:
+    #Utfyllnad
+    st.text("")
+    st.text("")
+    st.text("")
+    st.text("")
+    st.text("")
 
+    st.subheader('Vanligaste manliga orden i jobbannonser')
+    
 # Use the user input
 #st.write("You entered:", annons_input)
