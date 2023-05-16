@@ -35,7 +35,7 @@ data['Annons_length'] = ''
 ## Sätter stopwords
 stopwords_list = stopwords.words('swedish')
 stopwords_list += stopwords.words('english')
-stopwords_list.extend(['academic', 'work', 'the', 'tiqqe', 'även'])
+stopwords_list.extend(['academic', 'work', 'the', 'tiqqe', 'även', 'analytics', 'analysera'])
 
 ## Huvudloop
 for index in data.index:
@@ -69,3 +69,5 @@ print(data[['employer.name', 'Mask_score', 'Fem_score', 'Annons_length']].head(3
 #data.to_csv('Final_output.csv'),
 
 data.info()
+
+data.to_csv('Final_output.csv', encoding=('UTF8'))
