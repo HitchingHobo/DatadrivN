@@ -43,9 +43,9 @@ barchart_data = pd.DataFrame(top_30_ord(), columns=['Ord', 'Antal'])
 source = barchart_data
 
 base = alt.Chart(source).mark_bar().encode(
-    x=alt.X('Antal', sort='-x'),
-    y=alt.Y('Ord'),
+    x=alt.X('Antal'),
+    y=alt.Y('Ord', sort='-x' ),
     )
 
 
-st.altair_chart(base.mark_bar() + base.mark_text(align='left', dx=2), use_container_width=True)
+st.altair_chart(base.mark_bar(), use_container_width=True)
