@@ -8,18 +8,12 @@ def testa_annons(annons):
     gen_data.dropna(inplace=True)
 
     mask_list = []
-    fem_list = []
 
     ## Sätter maskulina & feminina ord i listor
     for row in gen_data['Maskulint kodade ord']:
         mask_list.append(row)
     for row in gen_data['Masculinecoded words']:
         mask_list.append(row)    
-    for row in gen_data['Feminint kodade ord']:
-        fem_list.append(row)
-    for row in gen_data['Femininecoded words']:
-        fem_list.append(row)
-
 
     ## Sätter stopwords
     stopwords_list = stopwords.words('swedish')
@@ -29,7 +23,6 @@ def testa_annons(annons):
     ## Preppar variabler
     antal_ord = 0
     mask_word_list = []
-    fem_word_list = []
 
 
     ## Huvudloop
@@ -39,15 +32,10 @@ def testa_annons(annons):
             for i in mask_list:
                 if word.startswith(i):
                     mask_word_list.append(i) 
-                    ##print(mask_word_list)
-            for i in fem_list:
-                if word.startswith(i):
-                    fem_word_list.append(i)
-                    ##print(fem_word_list)
         else:
             continue
 
-    return [mask_word_list, fem_word_list, antal_ord]
+    return [mask_word_list, antal_ord]
 
 
 
