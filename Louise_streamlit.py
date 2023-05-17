@@ -1,5 +1,7 @@
 import streamlit as st
-import pandas as pd 
+import pandas as pd
+from funktioner import *
+## return [mask_word_list, fem_word_list, antal_ord]
 
 data = pd.read_csv('Final_output.csv')
 st.set_page_config(page_title='Mindmakerzzz', page_icon='', layout='wide')
@@ -13,7 +15,8 @@ with col1:
     st.subheader('Se hur könsneutral din annons är!')
     
     annons_input = st.text_input("Testa din annons här: ", "Klistra in här...")
-    st.write('Din annons har...')
+    annons_results = testa_annons(annons_input)
+    st.write('Din annons har ', len(annons_results[0]), 'manliga')
 with col2:
     st.subheader("Do's and dont's")
     st.text("Do's:")

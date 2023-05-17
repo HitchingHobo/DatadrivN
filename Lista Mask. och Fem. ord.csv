@@ -2,8 +2,8 @@
 aktiv,anknyt,active,agree
 aggress,artig,adventurous,affectionate
 ambiti,anspråkslös,aggress,child
-analy,ansvar,ambitio,cheer
-atlet,barn,analy,collab
+analytisk,ansvar,ambitio,cheer
+atlet,barn,analytic,collab
 autonomi,beroende,assert,commit
 beslut,empati,athlet,communal
 bestäm,engage,autonom,compassion
@@ -21,7 +21,7 @@ impulsiv,snäll,defend,honest
 kraft,social kompetens,determin,interpersonal
 kompetent,släktskap,domina,interdependen
 ledare,smickra,dominant,interpersona
-logik,stöd,driven,interpersonal
+logik,stöd,,interpersonal
 logisk,stött,fearless,interdependen
 maskulin,sympati,fight,interpersona
 modig,samarbet,force,kind
@@ -30,7 +30,7 @@ självsäker,trevlig,headstrong,loyal
 självständig,tillgiven,headstrong,modesty
 självförtroende,tyst,hierarch,nag
 åsikt,tillsammans,hostil,nurtur
-drive,tillit,impulsive,pleasant
+,tillit,impulsive,pleasant
 driva,lita,independen,polite
 förkämpe,undergiven,individual,quiet
 försvar,varm,intellect,respon

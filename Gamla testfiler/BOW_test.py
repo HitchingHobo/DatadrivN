@@ -84,11 +84,12 @@ data_words = ','.join(list(data['Data_Clean'].values))
 Counter = Counter(data_words.split())
 most_frequent = Counter.most_common(30)
 
-# Bar plot of frequent words
+##Bar plot of frequent words
 # fig = plt.figure(1, figsize = (20,10))
 # _ = pd.DataFrame(most_frequent, columns=("words","count"))
 # sns.barplot(x = 'words', y = 'count', data = _, palette = 'winter')
 # plt.xticks(rotation=45);
+# plt.show()
 
 from wordcloud import WordCloud
 
