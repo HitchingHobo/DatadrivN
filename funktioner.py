@@ -50,30 +50,40 @@ def testa_annons(annons):
     return [mask_word_list, fem_word_list, antal_ord]
 
 
-## Testing
-# text1 = 'Winningtemps vision är att förändra hur vi har effektiva samarbeten på arbetsplatsen. Genom en gedigen vetenskaplig grund skapar Winningtemp en plattform för direkt uppföljning av välbefinnande och motivation hos sina kundanställda. Genom att  ""mäta temperaturen""  för sina anställda genom AI-baserad programvara kan kunderna arbeta både proaktivt och reaktivt för att motverka stress och arbeta för en förbättrad arbetsmiljö. Detta görs genom en stor förståelse för det mänskliga perspektivet i utveckling, med fokus på vad som gynnar  personen  bakom resultaten.'
 
-# results = testa_annons(text1)
-
-# print(results)
 from collections import Counter
 
-def totalt_antal_ord():
+def top_30_ord():
     data = pd.read_csv('final_output.csv', encoding=('UTF8'))
-    data_mask = ','.join(list(data['Mask_ord'].values))
+    
+    #data_mask = ','.join(list(data['Mask_ord'].values))
+    data = data['Mask_ord']
+    mask_list = []
+    for index in data.index:
+        row = data[index]
+        row = str(row).lower()
+        replacements = [("'", ""), ("[", ''), ("]",''), (" ", "")]
 
-    mask_counter = Counter(data_mask.split())
+        for char, replacement in replacements:
+            if char in row:
+                row = row.replace(char, replacement)
+        if row:        
+            row = row.split(',')
+            for i in row:
+                mask_list.append(i)
+        
+    mask_counter = Counter(mask_list)
     mask_vanligaste_ord = mask_counter.most_common(30)
 
     return mask_vanligaste_ord
 
-import seaborn as sns
-import matplotlib.pyplot as plt
 
-most_frequent = totalt_antal_ord()
 
-fig = plt.figure(1, figsize = (20,10))
-_ = pd.DataFrame(most_frequent, columns=("words","count"))
-sns.barplot(x = 'words', y = 'count', data = _, palette = 'winter')
-plt.xticks(rotation=45);
-plt.show()
+print(top_30_ord())
+print(type(top_30_ord()))
+print(type(top_30_ord()[0]))    
+
+barchart_data = pd.DataFrame(top_30_ord(), columns=['Ord', 'Antal'])
+
+barchart_data.info()
+print(barchart_data)

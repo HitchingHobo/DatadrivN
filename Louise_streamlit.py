@@ -26,16 +26,18 @@ with col2:
     st.text("Dont's")
 
 
-col3, col4 = st.columns(2)
-with col1:
+# col3, col4 = st.columns(2)
+# with col1:
     #Utfyllnad
-    st.text("")
-    st.text("")
-    st.text("")
-    st.text("")
-    st.text("")
+st.text("")
+st.text("")
+st.text("")
+st.text("")
+st.text("")
 
-    st.subheader('Vanligaste manliga orden i jobbannonser')
-    
+st.subheader('Vanligaste manliga orden i jobbannonser')
+barchart_data = pd.DataFrame(top_30_ord(), columns=['Ord', 'Antal'])
+st.bar_chart(barchart_data, x='Antal', y='Ord')
+
 # Use the user input
 #st.write("You entered:", annons_input)
