@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 from funktioner import *
+import nltk
+nltk.download('stopwords') 
 ## return [mask_word_list, fem_word_list, antal_ord]
 
 data = pd.read_csv('Final_output.csv')
@@ -13,7 +15,10 @@ st.subheader("Lär dig att rekrytera kvinnliga utvecklare med vår tjänst!")
 col1, col2 = st.columns(2)
 with col1:
     st.subheader('Se hur könsneutral din annons är!')
-    
+    st.text("")
+    st.text("")
+    st.text("")
+    st.text("")
     annons_input = st.text_input("Testa din annons här: ", "Klistra in här...")
     annons_results = testa_annons(annons_input)
     st.write('Din annons har ', len(annons_results[0]), 'manliga')
