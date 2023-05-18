@@ -1,8 +1,7 @@
 import streamlit as st
 import pandas as pd
 from funktioner import *
-import nltk
-nltk.download('stopwords') 
+import altair as alt
 ## return [mask_word_list, fem_word_list, antal_ord]
 
 data = pd.read_csv('Final_output.csv')
@@ -41,8 +40,16 @@ st.text("")
 st.text("")
 
 st.subheader('Vanligaste manliga orden i jobbannonser')
-barchart_data = pd.DataFrame(top_30_ord(), columns=['Ord', 'Antal'])
-st.bar_chart(barchart_data, x='Antal', y='Ord')
+
+source = barchart_data
+
+base = alt.Chart(source).mark_bar().encode(
+    x=alt.X('Antal'),
+    y=alt.Y('Ord', sort='-x'),
+    )
+
+
+st.altair_chart(base.mark_bar() + base.mark_text(align='left', dx=2), use_container_width=True)
 
 # Use the user input
 #st.write("You entered:", annons_input)
