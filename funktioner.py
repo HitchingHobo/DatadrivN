@@ -41,7 +41,7 @@ def testa_annons(annons):
 
 from collections import Counter
 
-def top_30_ord():
+def top_20_ord():
     data = pd.read_csv('final_output.csv', encoding=('UTF8'))
     
     #data_mask = ','.join(list(data['Mask_ord'].values))
@@ -61,17 +61,17 @@ def top_30_ord():
                 mask_list.append(i)
         
     mask_counter = Counter(mask_list)
-    mask_vanligaste_ord = mask_counter.most_common(30)
+    mask_vanligaste_ord = mask_counter.most_common(20)
 
     return mask_vanligaste_ord
 
 
 
-print(top_30_ord())
-print(type(top_30_ord()))
-print(type(top_30_ord()[0]))    
+print(top_20_ord())
+print(type(top_20_ord()))
+print(type(top_20_ord()[0]))    
 
-barchart_data = pd.DataFrame(top_30_ord(), columns=['Ord', 'Antal'])
+barchart_data = pd.DataFrame(top_20_ord(), columns=['Ord', 'Antal'])
 
 barchart_data.info()
 print(barchart_data)
