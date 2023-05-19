@@ -38,8 +38,8 @@ def testa_annons(annons):
     return [mask_word_list, antal_ord]
 
 
-
 from collections import Counter
+
 
 def top_20_ord():
     data = pd.read_csv('final_output.csv', encoding=('UTF8'))
@@ -67,11 +67,22 @@ def top_20_ord():
 
 
 
-print(top_20_ord())
-print(type(top_20_ord()))
-print(type(top_20_ord()[0]))    
+# def top_foretag():
+#     data = pd.read_csv('final_output.csv',
+#                         encoding=('UTF8'),
+#                         nrows=20,)
+#     data = data[['Mask_ord', 'employer.name']]
+#     foretag_dict = {}
+#     companies = data['employer.name'].unique()  
+#     print(companies)  
+#     for i in companies:
+#         x = 0
+#         for index in data.index:
+#             row = data['Mask_ord'][index]
+#             row = row.split(',')
+#             x += 1
+#             y = + len(row)
+#             foretag_dict[i] = y/x
 
-barchart_data = pd.DataFrame(top_20_ord(), columns=['Ord', 'Antal'])
-
-barchart_data.info()
-print(barchart_data)
+#     return foretag_dict
+# print(top_foretag())

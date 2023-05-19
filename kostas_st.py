@@ -5,7 +5,7 @@ import altair as alt
 ## return [mask_word_list, fem_word_list, antal_ord]
 
 data = pd.read_csv('Final_output.csv')
-st.set_page_config(page_title='Mindmakerzzz', page_icon='', layout='wide')
+st.set_page_config(page_title='Annonskollen', page_icon='', layout='wide')
 
 st.header("MindMakerz")
 st.subheader("Lär dig att rekrytera kvinnliga utvecklare med vår tjänst!")
