@@ -104,3 +104,13 @@ df.info()
 # df.to_csv('KMEANS_output.csv', 
 #           encoding='UTF8', 
 #           index=False)
+
+
+order_centroids = kmeans.cluster_centers_.argsort()[:, ::-1]
+terms = vectorizer.get_feature_names_out()
+
+for i in range(num_clusters):
+    print("Cluster {}:".format(i))
+    top_words = [terms[ind] for ind in order_centroids[i, :10]]  # Adjust the number of top words to display
+    #top_words = top_words.sort()
+    print(top_words)
