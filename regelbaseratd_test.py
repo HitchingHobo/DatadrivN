@@ -21,7 +21,7 @@ for row in gen_data['Maskulint kodade ord']:
 #     fem_list.append(row)
 
 ## Importerar datan och preppar listor
-data = pd.read_csv('utvecklare_lista.csv',
+data = pd.read_csv('utvecklare_lista_svenska.csv',
                     encoding=('UTF8'))
 
 mask_word_list=[]
@@ -34,8 +34,7 @@ data['Annons_length'] = ''
 
 ## Sätter stopwords
 stopwords_list = stopwords.words('swedish')
-stopwords_list += stopwords.words('english')
-stopwords_list.extend(['academic', 'work', 'the', 'tiqqe', 'även', 'analytics', 'analysera'])
+stopwords_list.extend(['academic', 'work', 'tiqqe', 'analytics', 'analysera'])
 
 ## Huvudloop
 for index in data.index:
@@ -66,8 +65,7 @@ for index in data.index:
 
 
 print(data[['employer.name', 'Mask_score', 'Annons_length']].head(30).sort_values(by=['Mask_score']))
-#data.to_csv('Final_output.csv'),
 
 data.info()
 
-data.to_csv('Final_output.csv', encoding=('UTF8'))
+data.to_csv('Final_output_sve.csv', encoding=('UTF8'))
