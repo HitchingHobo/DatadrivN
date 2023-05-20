@@ -1,5 +1,14 @@
-import pandas as pd
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+from nltk.stem.snowball import SnowballStemmer
+from nltk.tokenize import RegexpTokenizer
 from nltk.corpus import stopwords
+from collections import Counter
+import pandas as pd
+import itertools
+import lemmy
+import re
 
 
 def testa_annons(annons):
@@ -9,21 +18,17 @@ def testa_annons(annons):
 
     mask_list = []
 
-    ## Sätter maskulina & feminina ord i listor
+    ## Sätter maskulina ord i listor
     for row in gen_data['Maskulint kodade ord']:
-        mask_list.append(row)
-    for row in gen_data['Masculinecoded words']:
-        mask_list.append(row)    
+        mask_list.append(row)  
 
     ## Sätter stopwords
     stopwords_list = stopwords.words('swedish')
-    stopwords_list += stopwords.words('english')
     stopwords_list.extend(['academic', 'work', 'the', 'tiqqe', 'även', 'analytics', 'analysera'])
 
     ## Preppar variabler
     antal_ord = 0
     mask_word_list = []
-
 
     ## Huvudloop
     for word in annons.split():
@@ -38,11 +43,8 @@ def testa_annons(annons):
     return [mask_word_list, antal_ord]
 
 
-from collections import Counter
-
-
 def top_20_ord():
-    data = pd.read_csv('final_output.csv', encoding=('UTF8'))
+    data = pd.read_csv('final_output.sve.csv', encoding=('UTF8'))
     
     #data_mask = ','.join(list(data['Mask_ord'].values))
     data = data['Mask_ord']
@@ -66,23 +68,51 @@ def top_20_ord():
     return mask_vanligaste_ord
 
 
+def preprocessor(text):
+    stemmer = SnowballStemmer(language='swedish')
+    lemmatizer = lemmy.load("sv")
 
-# def top_foretag():
-#     data = pd.read_csv('final_output.csv',
-#                         encoding=('UTF8'),
-#                         nrows=20,)
-#     data = data[['Mask_ord', 'employer.name']]
-#     foretag_dict = {}
-#     companies = data['employer.name'].unique()  
-#     print(companies)  
-#     for i in companies:
-#         x = 0
-#         for index in data.index:
-#             row = data['Mask_ord'][index]
-#             row = row.split(',')
-#             x += 1
-#             y = + len(row)
-#             foretag_dict[i] = y/x
+    text=str(text)
+    text = text.lower()
+    text=text.replace('{html}',"")
+    cleanr = re.compile('<.*?>')
+    cleantext = re.sub(cleanr, '', text)
 
-#     return foretag_dict
-# print(top_foretag())
+    rem_url=re.sub(r'http\S+', '',cleantext)
+    rem_num = re.sub('[0-9]+', '', rem_url)
+
+    tokenizer = RegexpTokenizer(r'\w+')
+    tokens = tokenizer.tokenize(rem_num)
+
+    filtered_words = [w for w in tokens if len(w) > 2 if not w in stopwords.words('swedish')]
+
+    stem_words=[stemmer.stem(w) for w in filtered_words]
+
+    lemma_words=[lemmatizer.lemmatize("",w) for w in stem_words]
+
+    output = list(itertools.chain.from_iterable(lemma_words))
+    return " ".join(output)
+
+
+def cosine_check_df(text_to_compare):
+    df = pd.read_csv('Final_output_sve.csv',
+                 encoding='utf-8')
+
+    df['processed.text'] = df['description.text'].apply(preprocessor)   
+    vectorizer = TfidfVectorizer()
+    vectorizer.fit(df['processed.text'])
+
+    vectors = vectorizer.transform(df['processed.text'])
+    input_vector = vectorizer.transform([preprocessor(text_to_compare)])
+    similarity_scores = cosine_similarity(input_vector, vectors)[0]
+
+    df['similarity_score'] = similarity_scores
+    
+    # Print the most similar text and its similarity score
+
+    most_similar_index = similarity_scores.argsort()[-1]
+    most_similar_text = df['processed.text'][most_similar_index]
+    most_similar_employer = df['employer.name'][most_similar_index]
+    similarity_score = similarity_scores[most_similar_index]
+
+    return [most_similar_text, most_similar_employer, similarity_score]

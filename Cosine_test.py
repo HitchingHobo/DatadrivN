@@ -9,10 +9,9 @@ import lemmy
 import re
 
 
-sample_annons = """Om jobbet
-Arbetsuppgifter
-- Programmering i alla dess former! T ex parprogrammering, mobprogrammering eller kanske något nytt 
-kreativt som du vill utforska? - Aktivt delta i beslut gällande produkter, features, arkitektur och affärsmål.
+sample_annons = """Om jobbet Arbetsuppgifter - Programmering i alla dess former! 
+T ex parprogrammering, mobprogrammering eller kanske något nytt kreativt som du vill utforska? 
+- Aktivt delta i beslut gällande produkter, features, arkitektur och affärsmål.
 - Lärande och kunskapsdelning i både team och organisation.
 Är du redo för något intressant? På SBAB jobbar vi värderingsdrivet. Wow! Hoppas vi att du tänker. 
 Våra värderingar är viktiga för oss på riktigt! De handlar om att jobba smart med fart, ta ansvar 
@@ -57,13 +56,19 @@ def preprocessor(text):
     text=text.replace('{html}',"")
     cleanr = re.compile('<.*?>')
     cleantext = re.sub(cleanr, '', text)
+
     rem_url=re.sub(r'http\S+', '',cleantext)
     rem_num = re.sub('[0-9]+', '', rem_url)
+
     tokenizer = RegexpTokenizer(r'\w+')
     tokens = tokenizer.tokenize(rem_num)
+
     filtered_words = [w for w in tokens if len(w) > 2 if not w in stopwords.words('swedish')]
+
     stem_words=[stemmer.stem(w) for w in filtered_words]
+
     lemma_words=[lemmatizer.lemmatize("",w) for w in stem_words]
+
     output = list(itertools.chain.from_iterable(lemma_words))
     return " ".join(output)
 
@@ -81,8 +86,6 @@ vectorizer = TfidfVectorizer()
 vectorizer.fit(df['processed.text'])
 
 vectors = vectorizer.transform(df['processed.text'])
-
-cosine_sim = cosine_similarity(vectors, vectors)
 
 input_vector = vectorizer.transform([preprocessor(sample_annons)])
 
