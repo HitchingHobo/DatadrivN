@@ -42,62 +42,65 @@ df.info()
 ## Visualisering
 
 
-## Använder PCA för visualisering
-pca = PCA(n_components=2)
-X_pca = pca.fit_transform(X.toarray())
+# ## Använder PCA för visualisering
+# pca = PCA(n_components=2)
+# X_pca = pca.fit_transform(X.toarray())
 
-## Scatterplot
-plt.scatter(X_pca[:, 0], X_pca[:, 1], c=df[df['har_mask_ord']]['cluster_label'])
-plt.xlabel('Principal Component 1')
-plt.ylabel('Principal Component 2')
-plt.title('PCA resultat')
-plt.show()
+# ## Scatterplot
+# plt.scatter(X_pca[:, 0], X_pca[:, 1], c=df[df['har_mask_ord']]['cluster_label'])
+# plt.xlabel('Principal Component 1')
+# plt.ylabel('Principal Component 2')
+# plt.title('PCA resultat')
+# plt.show()
 
 
 
-## Visar top bidragande ord till varje cluster
-pc1_loadings = pca.components_[0]
-pc2_loadings = pca.components_[1]
+# ## Visar top bidragande ord till varje cluster
+# pc1_loadings = pca.components_[0]
+# pc2_loadings = pca.components_[1]
 
-top_features_pc1 = pc1_loadings.argsort()[::-1][:5]
-top_features_pc2 = pc2_loadings.argsort()[::-1][:5]
+# top_features_pc1 = pc1_loadings.argsort()[::-1][:5]
+# top_features_pc2 = pc2_loadings.argsort()[::-1][:5]
 
-feature_names = vectorizer.get_feature_names_out()
+# feature_names = vectorizer.get_feature_names_out()
 
-## Printar topp 5 ord
-print("Topp 5 ord för Principal Component 1:")
-for feature_idx in top_features_pc1:
-    print(feature_names[feature_idx])
+# ## Printar topp 5 ord
+# print("Topp 5 ord för Principal Component 1:")
+# for feature_idx in top_features_pc1:
+#     print(feature_names[feature_idx])
     
-print("\nTopp 5 ord för Principal Component 2:")
-for feature_idx in top_features_pc2:
-    print(feature_names[feature_idx])
+# print("\nTopp 5 ord för Principal Component 2:")
+# for feature_idx in top_features_pc2:
+#     print(feature_names[feature_idx])
 
 
 
 
-## Visualisering i 3D
-pca = PCA(n_components=3)
-X_pca = pca.fit_transform(X.toarray())
+# ## Visualisering i 3D
+# pca = PCA(n_components=3)
+# X_pca = pca.fit_transform(X.toarray())
 
 
-fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
-scatter = ax.scatter(X_pca[:, 0], X_pca[:, 1], X_pca[:, 2], c=cluster_labels, cmap='viridis')
+# fig = plt.figure()
+# ax = fig.add_subplot(111, projection='3d')
+# scatter = ax.scatter(X_pca[:, 0], X_pca[:, 1], X_pca[:, 2], c=cluster_labels, cmap='viridis')
 
-ax.set_xlabel('Principal Component 1')
-ax.set_ylabel('Principal Component 2')
-ax.set_zlabel('Principal Component 3')
-ax.set_title('Clustering Results (PCA)')
+# ax.set_xlabel('Principal Component 1')
+# ax.set_ylabel('Principal Component 2')
+# ax.set_zlabel('Principal Component 3')
+# ax.set_title('Clustering Results (PCA)')
 
-legend_elements = scatter.legend_elements()
-labels = [f'Cluster {label}' for label in np.unique(cluster_labels)]
-legend = ax.legend(legend_elements[0], labels, loc='upper right', title='Clusters')
-
-
-plt.setp(legend.get_title(), fontsize='11')
-
-plt.show()
+# legend_elements = scatter.legend_elements()
+# labels = [f'Cluster {label}' for label in np.unique(cluster_labels)]
+# legend = ax.legend(legend_elements[0], labels, loc='upper right', title='Clusters')
 
 
+# plt.setp(legend.get_title(), fontsize='11')
 
+# plt.show()
+
+
+## Output för analys
+# df.to_csv('KMEANS_output.csv', 
+#           encoding='UTF8', 
+#           index=False)

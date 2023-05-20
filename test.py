@@ -1,10 +1,11 @@
 import pandas as pd
 
 
+pd.set_option('display.max_rows', None)
+data=pd.read_csv('KMEANS_output.csv', 
+                 encoding=('UTF8'),
+                 nrows=100)
 
-data=pd.read_csv('Final_output.csv', encoding=('UTF8'))
-data.info()
-
-print(data.head(30))
-
-print(data.head(30).sort_values(by=['Mask_score']))
+data=data[['cluster_label', 'employer.name']]
+data.sort_values(by=['employer.name'], inplace=True)
+print(data)
