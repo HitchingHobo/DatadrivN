@@ -4,7 +4,7 @@ from funktioner import *
 import altair as alt
 ## return [mask_word_list, fem_word_list, antal_ord]
 
-data = pd.read_csv('Final_output.csv')
+data = pd.read_csv('Final_output_sve.csv')
 st.set_page_config(page_title='Annonskollen', page_icon='', layout='wide')
 
 st.header("MindMakerz")

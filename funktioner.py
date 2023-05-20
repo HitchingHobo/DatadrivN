@@ -44,7 +44,7 @@ def testa_annons(annons):
 
 
 def top_20_ord():
-    data = pd.read_csv('final_output.sve.csv', encoding=('UTF8'))
+    data = pd.read_csv('Final_output_sve.csv', encoding=('UTF8'))
     
     #data_mask = ','.join(list(data['Mask_ord'].values))
     data = data['Mask_ord']
