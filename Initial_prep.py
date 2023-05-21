@@ -1,4 +1,6 @@
 from funktioner import *
+
+
 ############# OBS Preppsteg, körs bara 1 gång (redan körd) #############
 
 # # # # # # df = pd.read_csv('Final_output_sve.csv',
