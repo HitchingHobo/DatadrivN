@@ -74,37 +74,81 @@ def preprocessor(text):
 
 
 
-df = pd.read_csv('Final_output_sve.csv',
-                 encoding='utf-8',
-                 nrows=10)
+# df = pd.read_csv('Final_output_sve.csv',
+#                  encoding='utf-8',
+#                  nrows=10)
 
+# df['processed.text'] = df['description.text'].apply(preprocessor)
+
+
+
+# vectorizer = TfidfVectorizer()
+# vectorizer.fit(df['processed.text'])
+
+# vectors = vectorizer.transform(df['processed.text'])
+
+# input_vector = vectorizer.transform([preprocessor(sample_annons)])
+
+# similarity_scores = cosine_similarity(input_vector, vectors)[0]
+
+
+# df['similarity_score'] = similarity_scores
+# # Print the most similar text and its similarity score
+
+# most_similar_index = similarity_scores.argsort()[-1]
+# most_similar_text = df['processed.text'][most_similar_index]
+# most_similar_other_column = df['employer.name'][most_similar_index]
+# similarity_score = similarity_scores[most_similar_index]
+
+# print("Original text:", preprocessor(sample_annons))
+# print("Most similar text:", most_similar_text)
+# print("Employer name:", most_similar_other_column)
+# print("Similarity score:", similarity_score)
+
+
+test_df = pd.read_csv('TRYME.csv',
+                      encoding='utf-8',)
+
+
+import pickle
+
+def vectorize_dataframe(df, column_name):
+    vectorizer = TfidfVectorizer()
+    vectors = vectorizer.fit_transform(df[column_name])
+    df['vectors'] = list(vectors.toarray())  # Store the vectorized representation
+
+    # Save the vectorizer object
+    with open('vectorizer.pkl', 'wb') as f:
+        pickle.dump(vectorizer, f)
+
+    return df
+
+def compare_sample_text(vectorized_df, sample_text):
+    # Load the vectorizer object
+    with open('vectorizer.pkl', 'rb') as f:
+        vectorizer = pickle.load(f)
+    vectorized_df = vectorized_df.to_numpy().flatten()
+    vectors = vectorized_df['vectors']
+    input_vector = vectorizer.transform([sample_text])
+    similarity_scores = cosine_similarity(input_vector, vectors)
+    return similarity_scores.flatten()
+
+# Example usage:
+df = pd.read_csv('Final_output_sve.csv',nrows=10)  # Replace with your DataFrame
 df['processed.text'] = df['description.text'].apply(preprocessor)
+# Vectorize the DataFrame
+vectorized_df = vectorize_dataframe(df, 'processed.text')
 
+# Compare a sample text with the vectorized DataFrame
+sample_text = "This is a sample text to compare"
+sample_text = preprocessor(sample_text)
 
+similarity_scores = compare_sample_text(vectorized_df, sample_text)
 
-vectorizer = TfidfVectorizer()
-vectorizer.fit(df['processed.text'])
+# Print the similarity scores
+print(similarity_scores)
 
-vectors = vectorizer.transform(df['processed.text'])
-
-input_vector = vectorizer.transform([preprocessor(sample_annons)])
-
-similarity_scores = cosine_similarity(input_vector, vectors)[0]
-
-
-df['similarity_score'] = similarity_scores
-# Print the most similar text and its similarity score
-
-most_similar_index = similarity_scores.argsort()[-1]
-most_similar_text = df['processed.text'][most_similar_index]
-most_similar_other_column = df['employer.name'][most_similar_index]
-similarity_score = similarity_scores[most_similar_index]
-
-print("Original text:", preprocessor(sample_annons))
-print("Most similar text:", most_similar_text)
-print("Employer name:", most_similar_other_column)
-print("Similarity score:", similarity_score)
-
-
-df.info()
-print(df.head(10))
+# print("Original text:", preprocessor(sample_annons))
+# print("Most similar text:", most_similar_text)
+# print("Employer name:", most_similar_other_column)
+# print("Similarity score:", similarity_score)
