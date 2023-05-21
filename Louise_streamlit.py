@@ -16,11 +16,11 @@ st.text("")
 st.markdown("***Hur funkar det?***") #ändra färg på texten?
 st.markdown(
     '''
-    Idag består techbranschen av **70% män**. Enligt kvalitativ data finns det en stor 
-    problematik kring att rekrytera kvinnliga utvecklare. 
-    Genom en databas med xxx jobbannonser har vi skapat en tjänst
-    för rekryterare som hjälper rekryterare att undvika manligt betingade ord i syfte
-    att attrahera kvinnliga kandidater. 
+    Idag består techbranschen av **70% män**. Samtidigt upplever arbetsgivare omfattande svårigheter med rekryteringen av kvinnliga utvecklare.
+    Med vår databas bestående av XXX jobbannonser har vi skapat en tjänst där rekryterare kan testa 
+    hur pass inkluderande deras annons är genom analys, för att undvika manligt betingade ord. 
+    På så vis kan man uppnå en mer jämställd arbetskår på företaget och gå i framkant för fler jämställda företag!
+  
 
     **Annonshjälpen erbjuder vägledning i form av att:**
     - Få din annons analyserad
