@@ -39,18 +39,6 @@ Gillar du oss, och tror att du kan bidra, är vårt tips att inte vänta för l�
 skicka in CV eller LinkedIn-profil. Har du andra idéer på hur du kan visa vem du är? 
 Spännande! Hur du än ansöker så ser vi fram emot att lära känna dig mer."""
  
-############# Prepp, körs bara 1 gång #############
-
-df = pd.read_csv('Final_output_sve.csv',
-                    encoding='utf-8',)
-
-df = testa_annons_df(df, 'description.text')
-
-df = calculate_avg_df(df, 'employer.name', 'Mask_score')
-
-prepare_df_for_cosine(df, 'description.text')
-
-############# Prepp, körs bara 1 gång #############
 
 
 ## Testa annons
