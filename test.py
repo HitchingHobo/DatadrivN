@@ -39,35 +39,20 @@ Gillar du oss, och tror att du kan bidra, är vårt tips att inte vänta för l�
 skicka in CV eller LinkedIn-profil. Har du andra idéer på hur du kan visa vem du är? 
 Spännande! Hur du än ansöker så ser vi fram emot att lära känna dig mer."""
  
+############# Prepp, körs bara 1 gång #############
 
 df = pd.read_csv('Final_output_sve.csv',
-                    encoding='utf-8',
-                    nrows=10)
+                    encoding='utf-8',)
 
 df = testa_annons_df(df, 'description.text')
 
-# df.info()
-# print(df)
-
-
 df = calculate_avg_df(df, 'employer.name', 'Mask_score')
 
-
-
-
-# # Exemepl på 5 rader
-
-# Preprocess and vectorize the text column
 prepare_df_for_cosine(df, 'description.text')
 
-#Loading vectorized data from file
-vectorized_data = load_vectorized_data()
+############# Prepp, körs bara 1 gång #############
 
-# Loads vectorizer and preprocesses incoming annons
-input_vector = vectorized_data['vectorizer'].transform([preprocessor(sample_annons)])
 
-# Calculates cosine simulatiry
-similarity_scores = cosine_similarity(input_vector, vectorized_data['vectors']).flatten()
-
-df.info()
-print(df)
+## Testa annons
+annons_cosine = calc_similarity_dict_out(sample_annons, df, 'employer.name', 'description.text')
+print(annons_cosine)

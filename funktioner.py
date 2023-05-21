@@ -44,7 +44,6 @@ def testa_annons(annons):
     return [mask_word_list, antal_ord]
 
 
-
 def testa_annons_df(data, text_column):
     gen_data = pd.read_csv('Lista Mask. och Fem. ord.csv', encoding='UTF8')
     gen_data.dropna(inplace=True)
@@ -79,7 +78,6 @@ def testa_annons_df(data, text_column):
     return data
 
 
-
 def calculate_avg_df(df, group_by, column_to_avg):
 
     calc_df = df.groupby(group_by)[column_to_avg].agg(['sum', 'mean'])
@@ -89,6 +87,7 @@ def calculate_avg_df(df, group_by, column_to_avg):
     Named_df.rename(columns={"mean": "Genomsnitt_mask_ord"}, inplace=True)
 
     return Named_df
+
 
 def top_20_ord():
     data = pd.read_csv('Final_output_sve.csv', encoding=('UTF8'))
@@ -139,47 +138,18 @@ def preprocessor(text):
     output = list(itertools.chain.from_iterable(lemma_words))
     return " ".join(output)
 
-################# UNDER ÄNDRING #################
-
-
-# def cosine_check_df(text_to_compare):
-#     df = pd.read_csv('Final_output_sve.csv',
-#                  encoding='utf-8',
-#                  nrows=10)
-
-#     df['processed.text'] = df['description.text'].apply(preprocessor)   
-#     vectorizer = TfidfVectorizer()
-#     vectorizer.fit(df['processed.text'])
-
-#     vectors = vectorizer.transform(df['processed.text'])
-#     input_vector = vectorizer.transform([preprocessor(text_to_compare)])
-#     print(input_vector)
-#     similarity_scores = cosine_similarity(input_vector, vectors)[0]
-
-#     df['similarity_score'] = similarity_scores
-    
-#     # Print the most similar text and its similarity score
-
-#     most_similar_index = similarity_scores.argsort()[-1]
-#     most_similar_text = df['processed.text'][most_similar_index]
-#     most_similar_employer = df['employer.name'][most_similar_index]
-#     similarity_score = similarity_scores[most_similar_index]
-
-#     return [most_similar_text, most_similar_employer, similarity_score]
-
-
-################# UNDER ÄNDRING #################
 
 def vectorize_texts(texts):
     vectorizer = TfidfVectorizer()
     vectors = vectorizer.fit_transform(texts)
     return vectors, vectorizer
 
+
 def prepare_df_for_cosine(df, text_column):
     preprocessed_texts = df[text_column].apply(preprocessor)
     vectors, vectorizer = vectorize_texts(preprocessed_texts)
     
-    # Store the vectorized representations and corresponding index/identifier
+    # Sparar vectorized data med pickle för framtida jämförelse med cosine
     vectorized_data = {
         'vectors': vectors,
         'vectorizer': vectorizer}
@@ -187,29 +157,25 @@ def prepare_df_for_cosine(df, text_column):
     with open('vectorized_data.pkl', 'wb') as f:
         pickle.dump(vectorized_data, f)
 
-def calculate_similarity(vectorized_data, sample_text):
-    input_vector = vectorized_data['vectorizer'].transform([preprocessor(sample_text)])
-    similarity_scores = cosine_similarity(input_vector, vectorized_data['vectors']).flatten()
-    
-    return similarity_scores
 
-def load_vectorized_data():
-    # Load the vectorized data and vectorizer object
+def calc_similarity_dict_out(input_annons, data, employer_name, annons_text):
+
     with open('vectorized_data.pkl', 'rb') as f:
         vectorized_data = pickle.load(f)
-    return vectorized_data
 
-# # Exemepl på 5 rader
-# df = pd.read_csv('Utvecklare_lista_svenska.csv',nrows=10)
+    input_vector = vectorized_data['vectorizer'].transform([preprocessor(input_annons)])
+    sim_scores = cosine_similarity(input_vector, vectorized_data['vectors']).flatten()
+    
+    most_similar_index = sim_scores.argsort()[-1]
+    most_similar_other_column = data[employer_name][most_similar_index]
+    sim_score = sim_scores[most_similar_index]
 
-# # Preprocess and vectorize the text column
-# prepare_df_for_cosine(df, 'description.text')
+    output_dict = {}
+    output_dict['Similarity poäng'] = sim_score
+    output_dict['Företag'] = most_similar_other_column
+    output_dict['Mest liknande annons'] = data[annons_text][most_similar_index]
+    
+    return output_dict
 
-# #Loading vectorized data from file
-# vectorized_data = load_vectorized_data()
 
-# # Loads vectorizer and preprocesses incoming annons
-# input_vector = vectorized_data['vectorizer'].transform([preprocessor(sample_annons)])
 
-# # Calculates cosine simulatiry
-# similarity_scores = cosine_similarity(input_vector, vectorized_data['vectors']).flatten()
