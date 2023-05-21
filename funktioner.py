@@ -45,9 +45,11 @@ def testa_annons(annons):
 
 
 def testa_annons_df(data, text_column):
+    ## Hämtar maskulina ord
     gen_data = pd.read_csv('Lista Mask. och Fem. ord.csv', encoding='UTF8')
     gen_data.dropna(inplace=True)
 
+    ## Sätter maskulina ord i listor och preppar dataframe's nya kolumner
     mask_list = []
     for row in gen_data['Maskulint kodade ord']:
         mask_list.append(row)
@@ -56,9 +58,11 @@ def testa_annons_df(data, text_column):
     data['Mask_ord'] = ''
     data['Annons_length'] = ''
 
+    ## Sätter stopwords
     stopwords_list = stopwords.words('swedish')
     stopwords_list.extend(['analytics', 'analysera'])
 
+    ## Huvudloop
     for index, row in data.iterrows():
         text = str(row[text_column]).lower()
         mask_word_list = []
@@ -80,8 +84,10 @@ def testa_annons_df(data, text_column):
 
 def calculate_avg_df(df, group_by, column_to_avg):
 
+    ## Räknar ut summan och medelvärdet av maskulina ord per företag
     calc_df = df.groupby(group_by)[column_to_avg].agg(['sum', 'mean'])
 
+    ## Slår ihop och snyggar till kolumnerna
     Named_df = df.merge(calc_df, left_on=group_by, right_index=True)
     Named_df.rename(columns={"sum": "Totala_mask_ord"}, inplace=True)
     Named_df.rename(columns={"mean": "Genomsnitt_mask_ord"}, inplace=True)
@@ -92,8 +98,11 @@ def calculate_avg_df(df, group_by, column_to_avg):
 def top_20_ord():
     data = pd.read_csv('Final_output_sve.csv', encoding=('UTF8'))
     
+    ## Hämtar bara de maskulina orden från annonserna
     data = data['Mask_ord']
     mask_list = []
+
+    ## Preppar strängarna och lägger orden i en lista
     for index in data.index:
         row = data[index]
         row = str(row).lower()
@@ -102,11 +111,13 @@ def top_20_ord():
         for char, replacement in replacements:
             if char in row:
                 row = row.replace(char, replacement)
+        
         if row:        
             row = row.split(',')
             for i in row:
                 mask_list.append(i)
-        
+
+    ## Räknar totalen och skickar tillbaka top 20 använda maskulina ord  
     mask_counter = Counter(mask_list)
     mask_vanligaste_ord = mask_counter.most_common(20)
 
@@ -114,9 +125,11 @@ def top_20_ord():
 
 
 def preprocessor(text):
+    
     stemmer = SnowballStemmer(language='swedish')
     lemmatizer = lemmy.load("sv")
 
+    ## Klassisk textprepp
     text=str(text)
     text = text.lower()
     text=text.replace('{html}',"")
@@ -126,30 +139,38 @@ def preprocessor(text):
     rem_url=re.sub(r'http\S+', '',cleantext)
     rem_num = re.sub('[0-9]+', '', rem_url)
 
+    ## Tokenizing
     tokenizer = RegexpTokenizer(r'\w+')
     tokens = tokenizer.tokenize(rem_num)
 
+    ## Tar bort stoppord och ord under 2 bokstäver
     filtered_words = [w for w in tokens if len(w) > 2 if not w in stopwords.words('swedish')]
 
+    ## Stemmar och lemmar
     stem_words=[stemmer.stem(w) for w in filtered_words]
-
     lemma_words=[lemmatizer.lemmatize("",w) for w in stem_words]
 
+    ## Returnerar en sträng
     output = list(itertools.chain.from_iterable(lemma_words))
     return " ".join(output)
 
 
 def vectorize_texts(texts):
+
+    ## Vectorizerar en text
     vectorizer = TfidfVectorizer()
     vectors = vectorizer.fit_transform(texts)
+
     return vectors, vectorizer
 
 
 def prepare_df_for_cosine(df, text_column):
+
+    ## Preppar en texten från df för cosine similarity
     preprocessed_texts = df[text_column].apply(preprocessor)
     vectors, vectorizer = vectorize_texts(preprocessed_texts)
     
-    # Sparar vectorized data med pickle för framtida jämförelse med cosine
+    ## Sparar vectorized data med pickle för framtida jämförelse med cosine
     vectorized_data = {
         'vectors': vectors,
         'vectorizer': vectorizer}
@@ -160,16 +181,20 @@ def prepare_df_for_cosine(df, text_column):
 
 def calc_similarity_dict_out(input_annons, data, employer_name, annons_text):
 
+    ## Hämtar sparade vectorized data med pickle
     with open('vectorized_data.pkl', 'rb') as f:
         vectorized_data = pickle.load(f)
 
+    ## Preppar input annonsen och vectorizerar den
     input_vector = vectorized_data['vectorizer'].transform([preprocessor(input_annons)])
     sim_scores = cosine_similarity(input_vector, vectorized_data['vectors']).flatten()
     
+    ## Sorterar och hämtar mest liknande annons och företag
     most_similar_index = sim_scores.argsort()[-1]
     most_similar_other_column = data[employer_name][most_similar_index]
     sim_score = sim_scores[most_similar_index]
 
+    ## Skapar en dict som output
     output_dict = {}
     output_dict['Similarity poäng'] = sim_score
     output_dict['Företag'] = most_similar_other_column
