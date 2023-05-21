@@ -76,7 +76,7 @@ def preprocessor(text):
 
 df = pd.read_csv('Final_output_sve.csv',
                  encoding='utf-8',
-                 nrows=2000)
+                 nrows=10)
 
 df['processed.text'] = df['description.text'].apply(preprocessor)
 
@@ -106,3 +106,5 @@ print("Employer name:", most_similar_other_column)
 print("Similarity score:", similarity_score)
 
 
+df.info()
+print(df.head(10))

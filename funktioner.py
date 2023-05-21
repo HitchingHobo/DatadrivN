@@ -93,10 +93,11 @@ def preprocessor(text):
     output = list(itertools.chain.from_iterable(lemma_words))
     return " ".join(output)
 
-
+################# UNDER ÄNDRING #################
 def cosine_check_df(text_to_compare):
     df = pd.read_csv('Final_output_sve.csv',
-                 encoding='utf-8')
+                 encoding='utf-8',
+                 nrows=10)
 
     df['processed.text'] = df['description.text'].apply(preprocessor)   
     vectorizer = TfidfVectorizer()
@@ -104,6 +105,7 @@ def cosine_check_df(text_to_compare):
 
     vectors = vectorizer.transform(df['processed.text'])
     input_vector = vectorizer.transform([preprocessor(text_to_compare)])
+    print(input_vector)
     similarity_scores = cosine_similarity(input_vector, vectors)[0]
 
     df['similarity_score'] = similarity_scores
@@ -116,3 +118,5 @@ def cosine_check_df(text_to_compare):
     similarity_score = similarity_scores[most_similar_index]
 
     return [most_similar_text, most_similar_employer, similarity_score]
+################# UNDER ÄNDRING #################
+
