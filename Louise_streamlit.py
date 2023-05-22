@@ -20,53 +20,63 @@ st.markdown(
     Med vår databas bestående av 5432 jobbannonser har vi skapat en tjänst där rekryterare kan testa 
     hur pass inkluderande deras annons är genom analys, för att undvika manligt betingade ord. 
     På så vis kan man uppnå en mer jämställd arbetskår på företaget och gå i framkant för fler jämställda företag!
-  
-
+    
     **Annonshjälpen erbjuder vägledning i form av att:**
     - Få din annons analyserad
     - Se de vanligaste manliga orden i jobbannonser
     - Do's and dont's
-    
-
     ''')
 
-
-
 st.text("")
 st.text("")
 st.text("")
 st.text("")
 
-col1, col2 = st.columns(2)
-with col1:
-    annons_input = st.text_area('Testa hur könsneutral din annons är: ',
+annons_input = st.text_area('Testa hur könsneutral din annons är: ',
                                 height=250,
                                 placeholder='Klistra in här...')
-    annons_results = testa_annons(annons_input)
-    
-# Create a text input box
-with col2:
-    st.text("")
-    st.text("")
-    st.text("")
-    if annons_input:
-        if len(annons_results[0]) < 1:
-            st.balloons() 
-            st.success('Bra jobbat! Din annons innehåller inga manliga ord.')
+annons_results = testa_annons(annons_input)
+
+st.text("")
+st.text("")
+st.text("")
+if annons_input:
+    if len(annons_results[0]) < 1:
+        st.balloons() 
+        st.success('Bra jobbat! Din annons innehåller inga manliga ord.')
         
-        else:
-            st.write('Din annons har ', len(annons_results[0]), 'manliga ord i sig')
-            st.write('De maskulint vinklade orden är: ')
-            for i in range(len(annons_results[0])):
-                st.write('-', annons_results[0][i])
+    else:
+        st.write('Din annons har ', len(annons_results[0]), 'manliga ord i sig')
+        st.write('De maskulint vinklade orden är: ')
+        for i in range(len(annons_results[0])):
+            st.write('-', annons_results[0][i])
+st.subheader("Do's & Dont's")
+#col1, col2 = st.columns(2)
+#with col1:
 
-#if annons_input:
- #   st.subheader('Testa')      
-
-
-# col3, col4 = st.columns(2)
-# with col1:
-    #Utfyllnad
+st.checkbox("Ord spelar roll")
+st.markdown("Ordvalet har betydelse. Omedvetet kan vissa ord avskräcka vissa från att söka. Tonalitet, bildval, hur arbetet beskrivs och hur företaget presenteras är också viktigt.")
+st.checkbox("Håll kravlistan kort")
+st.markdown(''' Forskning visar att fler män än kvinnor svarar på 
+jobbannonser med långa kravlistor. För många krav kan avskräcka även 
+erfarna och kvalificerade kvinnor att söka.''')
+st.checkbox("Uppmuntran")
+st.markdown('''Att berätta att företaget strävar mot större mångfald 
+är viktigt. Det är också bra att avsluta annonsen med att 
+uppmuntra läsaren att söka tjänsten.''')
+st.checkbox("Ge exempel")
+st.markdown('''Om inkludering är ett av företagets kärnvärden, 
+ge konkreta exempel på vad det innebär för medarbetarna; 
+flexibel arbetstid, möjligheten att arbeta deltid kan vara exempel.
+''')
+st.checkbox("Störst effekt för vissa roller")
+st.markdown('''Det är framför allt i roller som domineras av män
+som utformningen av platsannonsen påverkar fler
+ kvinnor att söka. När Tieto Evry reviderade platsannonser för 
+ projektledare blev det ingen skillnad, men ansökningarna från
+  kvinnor ökade kraftigt för programmeringsroller som 
+  domineras av män.''')
+#Utfyllnad
 st.text("")
 st.text("")
 st.text("")
