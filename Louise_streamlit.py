@@ -2,8 +2,8 @@ import streamlit as st
 import pandas as pd
 from funktioner import *
 import altair as alt
-from PIL import Image 
-## return [mask_word_list, fem_word_list, antal_ord]
+
+
 
 data = pd.read_csv('Final_output_sve.csv')
 st.set_page_config(page_title='Annonskollen', page_icon='', layout='wide')
@@ -40,6 +40,8 @@ annons_results = testa_annons(annons_input)
 st.text("")
 st.text("")
 st.text("")
+
+#testa annons
 if annons_input:
     if len(annons_results[0]) < 1:
         st.balloons() 
@@ -50,10 +52,19 @@ if annons_input:
         st.write('De maskulint vinklade orden är: ')
         for i in range(len(annons_results[0])):
             st.write('-', annons_results[0][i])
-st.subheader("Do's & Dont's")
-#col1, col2 = st.columns(2)
-#with col1:
+else:         
+    top_5 = top_5_random(data, 'employer.name', 'Genomsnitt_mask_ord', 'Annons_length')
+    st.write('''Här är fem företag som skriver annonser utan ett enda maskulint kodat ord, 
+            **bra jobbat!**''')
+    for i in top_5['employer.name']:
+        st.write('-', i)
+st.text("")
+if annons_input:
+    annons_cosine_dict = calc_similarity_dict_out(annons_input, data, 'employer.name', 'description.text')
+    st.write('Din annons är mest lik en annons från ', annons_cosine_dict['Företag'])
 
+#Do's and don'ts 
+st.subheader("Do's & Dont's")
 st.checkbox("Ord spelar roll")
 st.markdown("Ordvalet har betydelse. Omedvetet kan vissa ord avskräcka vissa från att söka. Tonalitet, bildval, hur arbetet beskrivs och hur företaget presenteras är också viktigt.")
 st.checkbox("Håll kravlistan kort")
@@ -83,6 +94,7 @@ st.text("")
 st.text("")
 st.text("")
 
+#Vanligste orden
 st.subheader('Vanligaste manliga orden i jobbannonser')
 barchart_data = pd.DataFrame(top_20_ord(data, 'Mask_ord'), columns=['Ord', 'Antal'])
 #st.bar_chart(barchart_data, x='Antal', y='Ord')
