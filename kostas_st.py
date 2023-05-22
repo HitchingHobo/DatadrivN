@@ -2,12 +2,30 @@ import streamlit as st
 import pandas as pd
 from funktioner import *
 import altair as alt
+from PIL import Image
 ## return [mask_word_list, fem_word_list, antal_ord]
+
+logo = Image.open('logo.png')
+
+
+
+#[theme]
+primaryColor="#ec0b0b"
+backgroundColor="#fdfdfd"
+secondaryBackgroundColor="#c3c3c3"
+textColor="#000000"
+
+
+
 
 data = pd.read_csv('Final_output.csv')
 st.set_page_config(page_title='Annonskollen', page_icon='', layout='wide')
 
-st.header("MindMakerz")
+column_top1, column_top2 = st.columns(2)
+with column_top1:
+    st.image(logo, width=250)
+with column_top2:
+    st.header("MindMakerz")
 st.subheader("Lär dig att rekrytera kvinnliga utvecklare med vår tjänst!")
 col1, col2 = st.columns(2)
 with col1:
