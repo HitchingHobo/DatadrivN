@@ -74,7 +74,7 @@ st.text("")
 st.text("")
 
 st.subheader('Vanligaste manliga orden i jobbannonser')
-barchart_data = pd.DataFrame(top_20_ord(), columns=['Ord', 'Antal'])
+barchart_data = pd.DataFrame(top_20_ord(data, 'Mask_ord'), columns=['Ord', 'Antal'])
 #st.bar_chart(barchart_data, x='Antal', y='Ord')
 
 source = barchart_data
