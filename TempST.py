@@ -40,7 +40,7 @@ st.text("")
 col1, col2 = st.columns(2)
 with col1:
     annons_input = st.text_area('Testa hur könsneutral din annons är: ',
-                                height=250,
+                                height=300,
                                 placeholder='Klistra in här...')
     annons_results = testa_annons(annons_input)
     
@@ -49,6 +49,7 @@ with col2:
     st.text("")
     st.text("")
     st.text("")
+
     if annons_input:
         if len(annons_results[0]) < 1:
             st.balloons() 
@@ -58,6 +59,12 @@ with col2:
             st.write('De maskulint vinklade orden är: ')
         for i in range(len(annons_results[0])):
             st.write('-', annons_results[0][i])
+    else:         
+        top_5 = top_5_random(df, 'employer.name', 'Genomsnitt_mask_ord', 'Annons_length')
+        st.write('''Här är fem företag som skriver annonser utan ett enda maskulint kodat ord, 
+                 **bra jobbat!**''')
+        for i in top_5['employer.name']:
+            st.write('-', i)
 
 
 st.text("")
