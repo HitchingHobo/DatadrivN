@@ -9,6 +9,7 @@ import pandas as pd
 import itertools
 import pickle
 import lemmy
+import math
 import re
 
 ## Regelbaserad ai som räknar maskulina ord (2 st.)
@@ -194,7 +195,7 @@ def prepare_df_for_cosine(df, text_column):
         pickle.dump(vectorized_data, f)
 
 
-def calc_similarity_dict_out(input_annons, data, employer_name, annons_text):
+def calc_similarity(input_annons, data, employer_name, annons_text):
 
     ## Hämtar sparade vectorized data med pickle
     with open('vectorized_data.pkl', 'rb') as f:
@@ -212,9 +213,9 @@ def calc_similarity_dict_out(input_annons, data, employer_name, annons_text):
 
     ## Skapar en dict som output
     output_dict = {}
-    output_dict['Similarity poäng'] = sim_score
-    output_dict['Företag'] = most_similar_other_column
-    output_dict['Mest liknande annons'] = data[annons_text][most_similar_index]
+    output_dict['similarity_score'] = sim_score
+    output_dict['employer'] = most_similar_other_column
+    output_dict['similar_ad'] = data[annons_text][most_similar_index]
     
     return output_dict
 
