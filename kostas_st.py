@@ -25,7 +25,16 @@ with col2:
     st.write('De maskulint vinklade orden är: ')
 
     for i in range(len(annons_results[0])):
-         st.write(annons_results[0][i])
+        st.write(annons_results[0][i])
+        if len(annons_results) == 1:
+             st.write('Du har inga kodade ord')
+        elif len(annons_results) == 2:
+            st.write('Du har 1 kodat ord')
+        elif len(annons_results) == 3:
+            st.write('Du har två kodade ord')
+        else:
+            st.write('Du har tre eller fler kodade ord')
+        
 
 if annons_input:
     st.subheader('Testa')      
