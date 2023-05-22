@@ -52,6 +52,20 @@ Spännande! Hur du än ansöker så ser vi fram emot att lära känna dig mer.""
 # df.info()
 
 df = pd.read_csv('Final_output_sve.csv')
-df.info()
-employer_equals = df.loc[df['Genomsnitt_mask_ord'] <= len(sample_annons[0])]
-print(employer_equals.sort_values(by=['Genomsnitt_mask_ord'], inplace=True))
+
+import random
+grouped_df = df.groupby('employer.name').mean()
+
+target_value = 18
+
+df['difference'] = abs(df['Genomsnitt_mask_ord'] - target_value)
+df = df.sort_values('difference')
+
+smallest_diff = df['difference'].min()
+
+closest_names = df[df['difference'] == smallest_diff]['employer.name']
+
+
+# print(closest_names)
+closest_name = closest_names.sample(n=1).iloc[0] if not closest_names.empty else None
+print(closest_name)
