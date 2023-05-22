@@ -17,7 +17,7 @@ st.markdown("***Hur funkar det?***") #ändra färg på texten?
 st.markdown(
     '''
     Idag består techbranschen av **70% män**. Samtidigt upplever arbetsgivare omfattande svårigheter med rekryteringen av kvinnliga utvecklare.
-    Med vår databas bestående av XXX jobbannonser har vi skapat en tjänst där rekryterare kan testa 
+    Med vår databas bestående av 5432 jobbannonser har vi skapat en tjänst där rekryterare kan testa 
     hur pass inkluderande deras annons är genom analys, för att undvika manligt betingade ord. 
     På så vis kan man uppnå en mer jämställd arbetskår på företaget och gå i framkant för fler jämställda företag!
   
@@ -49,15 +49,16 @@ with col2:
     st.text("")
     st.text("")
     st.text("")
-    if len(annons_results[0]) < 1:
-        st.balloons() 
-        st.success('Bra jobbat! Din annons innehåller inga manliga ord.')
+    if annons_input:
+        if len(annons_results[0]) < 1:
+            st.balloons() 
+            st.success('Bra jobbat! Din annons innehåller inga manliga ord.')
         
-    else:
-       st.write('Din annons har ', len(annons_results[0]), 'manliga ord i sig')
-       st.write('De maskulint vinklade orden är: ')
-       for i in range(len(annons_results[0])):
-           st.write('-', annons_results[0][i])
+        else:
+            st.write('Din annons har ', len(annons_results[0]), 'manliga ord i sig')
+            st.write('De maskulint vinklade orden är: ')
+            for i in range(len(annons_results[0])):
+                st.write('-', annons_results[0][i])
 
 #if annons_input:
  #   st.subheader('Testa')      
