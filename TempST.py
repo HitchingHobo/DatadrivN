@@ -69,9 +69,13 @@ with col2:
 
 st.text("")
 if annons_input:
-    annons_cosine_dict = calc_similarity_dict_out(annons_input, df, 'employer.name', 'description.text')
-    st.write('Din annons är mest lik en annons från ', annons_cosine_dict['Företag'])
-
+    annons_cosine_dict = calc_similarity(annons_input, df, 'employer.name', 'description.text')
+    perc_dist = (math.pi - math.acos(annons_cosine_dict['similarity_score']))  * 100 / math.pi
+    st.write('Din annons är mest lik en annons från ', annons_cosine_dict['employer'], )
+    st.write('Era annonsers liknar varandra till ungefär ', str(math.trunc(perc_dist)), '%')
+    if st.checkbox('Klicka för att visa annonsen'):
+        st.write('Deras annons ser ut såhär: ')
+        st.write(annons_cosine_dict['similar_ad'])
 # col3, col4 = st.columns(2)
 # with col1:
     #Utfyllnad

@@ -51,5 +51,10 @@ Spännande! Hur du än ansöker så ser vi fram emot att lära känna dig mer.""
 
 # df.info()
 
+
+
+
+
 df = pd.read_csv('Final_output_sve.csv')
+
 
