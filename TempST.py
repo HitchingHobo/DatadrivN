@@ -2,8 +2,6 @@ import streamlit as st
 import pandas as pd
 from funktioner import *
 import altair as alt
-from PIL import Image 
-## return [mask_word_list, fem_word_list, antal_ord]
 
 df = pd.read_csv('Final_output_sve.csv')
 st.set_page_config(page_title='Annonskollen', page_icon='', layout='wide')
@@ -76,9 +74,8 @@ if annons_input:
     if st.checkbox('Klicka för att visa annonsen'):
         st.write('Deras annons ser ut såhär: ')
         st.write(annons_cosine_dict['similar_ad'])
-# col3, col4 = st.columns(2)
-# with col1:
-    #Utfyllnad
+
+#Utfyllnad
 st.text("")
 st.text("")
 st.text("")
