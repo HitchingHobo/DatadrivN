@@ -20,7 +20,7 @@ st.markdown(
     Med vår databas bestående av XXX jobbannonser har vi skapat en tjänst där rekryterare kan testa 
     hur pass inkluderande deras annons är genom analys, för att undvika manligt betingade ord. 
     På så vis kan man uppnå en mer jämställd arbetskår på företaget och gå i framkant för fler jämställda företag!
-  
+
 
     **Annonshjälpen erbjuder vägledning i form av att:**
     - Få din annons analyserad
@@ -87,11 +87,9 @@ st.text("")
 
 st.subheader('Vanligaste manliga orden i jobbannonser')
 barchart_data = pd.DataFrame(top_20_ord(df, 'Mask_ord'), columns=['Ord', 'Antal'])
-#st.bar_chart(barchart_data, x='Antal', y='Ord')
+barchart_data.dropna(inplace=False)
 
-source = barchart_data
-
-base = alt.Chart(source).mark_bar().encode(
+base = alt.Chart(barchart_data).mark_bar().encode(
     x=alt.X('Antal'),
     y=alt.Y('Ord', sort='-x' ),
     )
