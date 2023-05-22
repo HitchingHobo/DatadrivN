@@ -48,6 +48,7 @@ if annons_input:
         st.success('Bra jobbat! Din annons innehåller inga manliga ord.')
         
     else:
+        ##### DET KOMMER MED DUBBLETTER!!!!
         st.write('Din annons har ', len(annons_results[0]), 'manliga ord i sig')
         st.write('De maskulint vinklade orden är: ')
         for i in range(len(annons_results[0])):
@@ -67,7 +68,11 @@ if annons_input:
     if st.checkbox('Klicka för att visa annonsen'):
         st.write('Deras annons ser ut såhär: ')
         st.write(annons_cosine_dict['similar_ad'])
-
+st.text("")
+st.text("")
+st.text("")
+st.text("")
+st.text("")
 #Do's and don'ts 
 st.subheader("Do's & Dont's")
 st.checkbox("Ord spelar roll")
