@@ -39,10 +39,33 @@ Gillar du oss, och tror att du kan bidra, är vårt tips att inte vänta för l�
 skicka in CV eller LinkedIn-profil. Har du andra idéer på hur du kan visa vem du är? 
 Spännande! Hur du än ansöker så ser vi fram emot att lära känna dig mer."""
  
-df = pd.read_csv('utvecklare_lista_svenska.csv',
-                 encoding='utf-8',
-                 )
+# df = pd.read_csv('Final_output_sve.csv',
+#                  encoding='utf-8',
+#                  )
 
-## Testa annons
-annons_cosine = calc_similarity_dict_out(sample_annons, df, 'employer.name', 'description.text')
-print(annons_cosine)
+# ## Testa annons
+# annons_cosine = calc_similarity_dict_out(sample_annons, df, 'employer.name', 'description.text')
+# print(annons_cosine)
+
+# print(type(annons_cosine['Similarity poäng']))
+
+# df.info()
+
+df = pd.read_csv('Final_output_sve.csv')
+
+import random
+grouped_df = df.groupby('employer.name').mean()
+
+target_value = 18
+
+df['difference'] = abs(df['Genomsnitt_mask_ord'] - target_value)
+df = df.sort_values('difference')
+
+smallest_diff = df['difference'].min()
+
+closest_names = df[df['difference'] == smallest_diff]['employer.name']
+
+
+# print(closest_names)
+closest_name = closest_names.sample(n=1).iloc[0] if not closest_names.empty else None
+print(closest_name)

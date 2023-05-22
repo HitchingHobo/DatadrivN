@@ -95,16 +95,15 @@ def calculate_avg_df(df, group_by, column_to_avg):
     return Named_df
 
 
-def top_20_ord():
-    data = pd.read_csv('Final_output_sve.csv', encoding=('UTF8'))
+def top_20_ord(df, mask_ord):
     
     ## Hämtar bara de maskulina orden från annonserna
-    data = data['Mask_ord']
+    df = df[mask_ord]
     mask_list = []
 
     ## Preppar strängarna och lägger orden i en lista
-    for index in data.index:
-        row = data[index]
+    for index in df.index:
+        row = df[index]
         row = str(row).lower()
         replacements = [("'", ""), ("[", ''), ("]",''), (" ", "")]
 
@@ -193,6 +192,7 @@ def calc_similarity_dict_out(input_annons, data, employer_name, annons_text):
     most_similar_index = sim_scores.argsort()[-1]
     most_similar_other_column = data[employer_name][most_similar_index]
     sim_score = sim_scores[most_similar_index]
+    
 
     ## Skapar en dict som output
     output_dict = {}
