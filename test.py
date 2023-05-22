@@ -39,10 +39,19 @@ Gillar du oss, och tror att du kan bidra, är vårt tips att inte vänta för l�
 skicka in CV eller LinkedIn-profil. Har du andra idéer på hur du kan visa vem du är? 
 Spännande! Hur du än ansöker så ser vi fram emot att lära känna dig mer."""
  
-df = pd.read_csv('utvecklare_lista_svenska.csv',
-                 encoding='utf-8',
-                 )
+# df = pd.read_csv('Final_output_sve.csv',
+#                  encoding='utf-8',
+#                  )
 
-## Testa annons
-annons_cosine = calc_similarity_dict_out(sample_annons, df, 'employer.name', 'description.text')
-print(annons_cosine)
+# ## Testa annons
+# annons_cosine = calc_similarity_dict_out(sample_annons, df, 'employer.name', 'description.text')
+# print(annons_cosine)
+
+# print(type(annons_cosine['Similarity poäng']))
+
+# df.info()
+
+df = pd.read_csv('Final_output_sve.csv')
+df.info()
+employer_equals = df.loc[df['Genomsnitt_mask_ord'] <= len(sample_annons[0])]
+print(employer_equals.sort_values(by=['Genomsnitt_mask_ord'], inplace=True))
