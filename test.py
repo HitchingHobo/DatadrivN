@@ -47,24 +47,44 @@ df = pd.read_csv('Final_output_sve.csv',
 
 
 
-# Assuming you have a DataFrame named 'df' with columns 'Company', 'Description', and 'Score'
+
+
+
+
+# Assuming you have a DataFrame named 'df' with columns 'employer.name', 'Genomsnitt_mask_ord', and 'Rank'
+
 
 def get_rank(input_score):
-    df['Rank'] = df['Mask_score'].rank(ascending=False, method='min')
-    rank = df.loc[df['Mask_score'] == input_score, 'Rank'].values[0]
+    # Group the DataFrame by rank
+    df['Rank'] = df['Genomsnitt_mask_ord'].rank(ascending=True, method='min')
+    grouped_df = df.groupby('Rank').agg({
+        'employer.name': 'first',
+        'Genomsnitt_mask_ord': 'first'
+    }).reset_index()
+
+    # Fetch the rank for input_score
+    rank = grouped_df.loc[grouped_df['Genomsnitt_mask_ord'] == input_score, 'Rank'].values[0]
     return rank
 
+
+
+
 # Example usage
-input_score = 8
-rank = get_rank(input_score)
+# input_score = 0
+# rank = get_rank(input_score)
 
-print(f"The input score of {input_score} ranks as {int(rank)}")
+# print(f"The input score of {input_score} ranks as {int(rank)}")
 
-df.info()
 
-# Assuming you have a DataFrame named 'df' with columns 'Company', 'Description', 'Score', and 'Rank'
+# # Assuming you have a DataFrame named 'df' with columns 'Company', 'Description', 'Score', and 'Rank'
 
-print(df[['employer.name', 'Mask_score', 'Rank']].head(10))
+# print(df[['employer.name', 'Genomsnitt_mask_ord', 'Rank']].head(10))
 
-df = df.sort_values(by=['Rank'], ascending=True)
-print(df.head(10))
+# df = df[['employer.name', 'Genomsnitt_mask_ord', 'Rank', 'Annons_length']]
+
+
+# df = df.groupby('employer.name').mean(numeric_only=True)
+# df = df.sort_values(by=['Rank'], ascending=True)
+group_df = get_group(df)
+print(df)
+print(group_df)
