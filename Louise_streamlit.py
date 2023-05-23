@@ -6,9 +6,9 @@ import altair as alt
 
 
 df = pd.read_csv('Final_output_sve.csv')
-st.set_page_config(page_title='Annonskollen', page_icon='', layout='wide')
+st.set_page_config(page_title='BiasBlaster', page_icon='', layout='wide')
 
-st.header("Annonskollen") 
+st.header("BiasBlaster") 
 st.subheader("Lär dig att rekrytera kvinnliga utvecklare med vår tjänst! :computer:")
 # lägga in en liten bild här? 
 st.text("")
