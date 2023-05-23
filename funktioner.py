@@ -61,7 +61,7 @@ def testa_annons_df(data, text_column):
 
     ## Sätter stopwords
     stopwords_list = stopwords.words('swedish')
-    stopwords_list.extend(['analytics', 'analysera'])
+    stopwords_list.extend(['analytics', 'analysera', 'aktiviteter', 'kraftnät', 'kraftsystem', 'försvarsmakten'])
 
     ## Huvudloop
     for index, row in data.iterrows():
