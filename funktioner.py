@@ -117,7 +117,8 @@ def top_20_ord(df, mask_ord):
     ## Hämtar bara de maskulina orden från annonserna
     df = df[mask_ord]
     mask_list = []
-
+    df = df.dropna()
+    
     ## Preppar strängarna och lägger orden i en lista
     for index in df.index:
         row = df[index]
@@ -218,6 +219,5 @@ def calc_similarity(input_annons, data, employer_name, annons_text):
     output_dict['similar_ad'] = data[annons_text][most_similar_index]
     
     return output_dict
-
 
 
