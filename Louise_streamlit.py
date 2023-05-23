@@ -19,6 +19,8 @@ with column_top2:
     st.header("BiasBlaster") 
     st.subheader("Lär dig att rekrytera kvinnliga utvecklare med vår tjänst! :computer:")
 
+st.divider()
+
 
 # lägga in en liten bild här? 
 st.text("")
@@ -51,6 +53,9 @@ st.text("")
 st.text("")
 st.text("")
 
+st.divider() 
+
+
 col1, col2 = st.columns(2)
 with col1:
 #testa annons
@@ -73,24 +78,24 @@ with col1:
             st.write('-', i)
 with col2: 
     #Do's and don'ts 
-    st.subheader("Do's & Dont's")
-    st.checkbox("Ord spelar roll")
-    st.markdown("Ordvalet har betydelse. Omedvetet kan vissa ord avskräcka vissa från att söka. Tonalitet, bildval, hur arbetet beskrivs och hur företaget presenteras är också viktigt.")
-    st.checkbox("Håll kravlistan kort")
-    st.markdown(''' Forskning visar att fler män än kvinnor svarar på 
+    st.expander("Do's & Dont's")
+    with st.expander("Ord spelar roll"):
+        st.markdown("Ordvalet har betydelse. Omedvetet kan vissa ord avskräcka vissa från att söka. Tonalitet, bildval, hur arbetet beskrivs och hur företaget presenteras är också viktigt.")
+    with st.expander("Håll kravlistan kort"):
+        st.markdown(''' Forskning visar att fler män än kvinnor svarar på 
     jobbannonser med långa kravlistor. För många krav kan avskräcka även 
     erfarna och kvalificerade kvinnor att söka.''')
-    st.checkbox("Uppmuntran")
-    st.markdown('''Att berätta att företaget strävar mot större mångfald 
+    with st.expander("Uppmuntran"):
+        st.markdown('''Att berätta att företaget strävar mot större mångfald 
     är viktigt. Det är också bra att avsluta annonsen med att 
     uppmuntra läsaren att söka tjänsten.''')
-    st.checkbox("Ge exempel")
-    st.markdown('''Om inkludering är ett av företagets kärnvärden, 
+    with st.expander("Ge exempel"):
+        st.markdown('''Om inkludering är ett av företagets kärnvärden, 
     ge konkreta exempel på vad det innebär för medarbetarna; 
     flexibel arbetstid, möjligheten att arbeta deltid kan vara exempel.
     ''')
-    st.checkbox("Störst effekt för vissa roller")
-    st.markdown('''Det är framför allt i roller som domineras av män
+    with st.expander("Störst effekt för vissa roller"):
+        st.markdown('''Det är framför allt i roller som domineras av män
     som utformningen av platsannonsen påverkar fler
     kvinnor att söka. När Tieto Evry reviderade platsannonser för 
     projektledare blev det ingen skillnad, men ansökningarna från
@@ -112,6 +117,9 @@ st.text("")
 st.text("")
 st.text("")
 st.text("")
+
+st.divider() 
+
 
 #Vanligste orden
 st.subheader('Vanligaste manliga orden i jobbannonser')
