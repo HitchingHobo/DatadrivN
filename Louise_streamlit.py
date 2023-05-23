@@ -3,8 +3,6 @@ import pandas as pd
 from funktioner import *
 import altair as alt
 
-
-
 df = pd.read_csv('Final_output_sve.csv')
 st.set_page_config(page_title='BiasBlaster', page_icon='', layout='wide')
 
