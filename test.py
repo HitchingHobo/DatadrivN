@@ -46,8 +46,3 @@ df = pd.read_csv('Final_output_sve.csv',
 
 
 
-barchart_data = pd.DataFrame(top_20_ord(df, 'Mask_ord'), columns=['Ord', 'Antal'])
-
-
-print(barchart_data)
-barchart_data.info()
