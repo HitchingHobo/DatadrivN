@@ -2,14 +2,20 @@ import streamlit as st
 import pandas as pd
 from funktioner import *
 import altair as alt
+from PIL import Image
 
+
+logo = Image.open('logo.png')
 
 
 df = pd.read_csv('Final_output_sve.csv')
 st.set_page_config(page_title='Annonskollen', page_icon='', layout='wide')
 
-st.header("Annonskollen") 
-st.subheader("Lär dig att rekrytera kvinnliga utvecklare med vår tjänst! :computer:")
+column_top1, column_top2 = st.columns(2)
+with column_top1:
+    st.image(logo, width=250)
+with column_top2:
+    st.subheader("Lär dig att rekrytera kvinnliga utvecklare med vår tjänst! :computer:")
 # lägga in en liten bild här? 
 st.text("")
 st.text("")
