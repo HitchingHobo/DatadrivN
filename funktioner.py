@@ -61,7 +61,7 @@ def testa_annons_df(data, text_column):
 
     ## Sätter stopwords
     stopwords_list = stopwords.words('swedish')
-    stopwords_list.extend(['analytics', 'analysera'])
+    stopwords_list.extend(['analytics', 'analysera', 'aktiviteter', 'kraftnät', 'kraftsystem', 'försvarsmakten'])
 
     ## Huvudloop
     for index, row in data.iterrows():
@@ -102,7 +102,6 @@ def top_5_random(df, employer_name, genomsnitt_mask_ord, annons_length):
     target_value = 8
 
     grouped_df['difference'] = abs(grouped_df[genomsnitt_mask_ord] - target_value)
-    smallest_diff = grouped_df['difference'].min()
 
     df_sorted = grouped_df.sort_values(genomsnitt_mask_ord, ascending=True).reset_index(drop=False)
     df_sorted = df_sorted.drop(df_sorted[df_sorted[annons_length] < 150].index)
@@ -117,6 +116,7 @@ def top_20_ord(df, mask_ord):
     ## Hämtar bara de maskulina orden från annonserna
     df = df[mask_ord]
     mask_list = []
+    df = df.dropna()
 
     ## Preppar strängarna och lägger orden i en lista
     for index in df.index:
@@ -218,6 +218,5 @@ def calc_similarity(input_annons, data, employer_name, annons_text):
     output_dict['similar_ad'] = data[annons_text][most_similar_index]
     
     return output_dict
-
 
 

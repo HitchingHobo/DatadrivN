@@ -46,8 +46,25 @@ df = pd.read_csv('Final_output_sve.csv',
 
 
 
-barchart_data = pd.DataFrame(top_20_ord(df, 'Mask_ord'), columns=['Ord', 'Antal'])
 
+# Assuming you have a DataFrame named 'df' with columns 'Company', 'Description', and 'Score'
 
-print(barchart_data)
-barchart_data.info()
+def get_rank(input_score):
+    df['Rank'] = df['Mask_score'].rank(ascending=False, method='min')
+    rank = df.loc[df['Mask_score'] == input_score, 'Rank'].values[0]
+    return rank
+
+# Example usage
+input_score = 8
+rank = get_rank(input_score)
+
+print(f"The input score of {input_score} ranks as {int(rank)}")
+
+df.info()
+
+# Assuming you have a DataFrame named 'df' with columns 'Company', 'Description', 'Score', and 'Rank'
+
+print(df[['employer.name', 'Mask_score', 'Rank']].head(10))
+
+df = df.sort_values(by=['Rank'], ascending=True)
+print(df.head(10))

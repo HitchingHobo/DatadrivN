@@ -41,7 +41,7 @@ with col1:
                                 height=300,
                                 placeholder='Klistra in här...')
     annons_results = testa_annons(annons_input)
-    
+
 # Create a text input box
 with col2:
     st.text("")
@@ -55,8 +55,15 @@ with col2:
         else:
             st.write('Din annons har ', len(annons_results[0]), 'manliga ord i sig')
             st.write('De maskulint vinklade orden är: ')
-        for i in range(len(annons_results[0])):
-            st.write('-', annons_results[0][i])
+            annons_results.append(set(annons_results[0]))
+            for ord in annons_results[2]:
+                count = annons_results[0].count(ord)
+                if count > 1:
+                    st.write(f"{ord} ({count} gånger)")
+                else:
+                    st.write(ord)
+
+
     else:         
         top_5 = top_5_random(df, 'employer.name', 'Genomsnitt_mask_ord', 'Annons_length')
         st.write('''Här är fem företag som skriver annonser utan ett enda maskulint kodat ord, 
@@ -68,6 +75,8 @@ with col2:
 st.text("")
 if annons_input:
     annons_cosine_dict = calc_similarity(annons_input, df, 'employer.name', 'description.text')
+    
+    ## Räknar ut en ungefärlig procent av Cosine Similarity Score
     perc_dist = (math.pi - math.acos(annons_cosine_dict['similarity_score']))  * 100 / math.pi
     st.write('Din annons är mest lik en annons från ', annons_cosine_dict['employer'], )
     st.write('Era annonsers liknar varandra till ungefär ', str(math.trunc(perc_dist)), '%')
