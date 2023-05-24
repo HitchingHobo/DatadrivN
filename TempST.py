@@ -96,36 +96,40 @@ with tab2:
                 st.write('Deras annons ser ut såhär: ')
                 st.write(annons_cosine_dict['similar_ad'])
 
-st.divider()
+#st.divider()
 
 col1, col2 = st.columns(2)
 with col1:
         #Do's and don'ts 
-    st.expander("Do's & Dont's")
-    with st.expander("Ord spelar roll"):
+    st.subheader("Do's & Dont's")
+    st.checkbox("Ord spelar roll")
+    with st.expander('Läs mer'):
         st.markdown("Ordvalet har betydelse. Omedvetet kan vissa ord avskräcka vissa från att söka. Tonalitet, bildval, hur arbetet beskrivs och hur företaget presenteras är också viktigt.")
-    with st.expander("Håll kravlistan kort"):
+    st.checkbox("Håll kravlistan kort")
+    with st.expander('Läs mer'):
         st.markdown(''' Forskning visar att fler män än kvinnor svarar på 
-    jobbannonser med långa kravlistor. För många krav kan avskräcka även 
-    erfarna och kvalificerade kvinnor att söka.''')
-    with st.expander("Uppmuntran"):
+        jobbannonser med långa kravlistor. För många krav kan avskräcka även 
+        erfarna och kvalificerade kvinnor att söka.''')
+    st.checkbox("Uppmuntran")
+    with st.expander('Läs mer'):
         st.markdown('''Att berätta att företaget strävar mot större mångfald 
     är viktigt. Det är också bra att avsluta annonsen med att 
     uppmuntra läsaren att söka tjänsten.''')
-    with st.expander("Ge exempel"):
+    st.checkbox("Ge exempel")
+    with st.expander('Läs mer'):
         st.markdown('''Om inkludering är ett av företagets kärnvärden, 
     ge konkreta exempel på vad det innebär för medarbetarna; 
     flexibel arbetstid, möjligheten att arbeta deltid kan vara exempel.
     ''')
-    with st.expander("Störst effekt för vissa roller"):
+    st.checkbox("Störst effekt för vissa roller")
+    with st.expander('Läs mer'):
         st.markdown('''Det är framför allt i roller som domineras av män
     som utformningen av platsannonsen påverkar fler
     kvinnor att söka. När Tieto Evry reviderade platsannonser för 
     projektledare blev det ingen skillnad, men ansökningarna från
     kvinnor ökade kraftigt för programmeringsroller som 
     domineras av män.''')
-
-st.divider() 
+#st.divider() 
 with col2:
     #Vanligste orden
     st.write('Vanligaste manliga orden i jobbannonser')
