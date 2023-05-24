@@ -9,7 +9,7 @@ logo = Image.open('logo.png')
 
 
 df = pd.read_csv('Final_output_sve.csv')
-st.set_page_config(page_title='BiasBlaster', page_icon='', layout='wide')
+st.set_page_config(page_title='BiasBlaster', page_icon='', layout='centered')
 
 
 column_top1, column_top2 = st.columns(2)
@@ -19,10 +19,9 @@ with column_top2:
     st.header("BiasBlaster") 
     st.subheader("Lär dig att rekrytera kvinnliga utvecklare med vår tjänst! :computer:")
 
-st.divider()
+#st.divider()
 
-
-# lägga in en liten bild här? 
+ 
 st.text("")
 st.text("")
 st.markdown("***Hur funkar det?***") #ändra färg på texten?
@@ -53,7 +52,7 @@ st.text("")
 st.text("")
 st.text("")
 
-st.divider() 
+#st.divider() 
 
 
 col1, col2 = st.columns(2)
@@ -65,7 +64,7 @@ with col1:
             st.success('Bra jobbat! Din annons innehåller inga manliga ord.')
         
         else:
-        ##### DET KOMMER MED DUBBLETTER!!!!
+        
             st.write('Din annons har ', len(annons_results[0]), 'manliga ord i sig')
             st.write('De maskulint vinklade orden är: ')
             for i in range(len(annons_results[0])):
@@ -78,23 +77,28 @@ with col1:
             st.write('-', i)
 with col2: 
     #Do's and don'ts 
-    st.expander("Do's & Dont's")
-    with st.expander("Ord spelar roll"):
-        st.markdown("Ordvalet har betydelse. Omedvetet kan vissa ord avskräcka vissa från att söka. Tonalitet, bildval, hur arbetet beskrivs och hur företaget presenteras är också viktigt.")
-    with st.expander("Håll kravlistan kort"):
+    st.subheader("Do's & Dont's")
+    st.checkbox("Ord spelar roll")
+    with st.expander('Läs mer'):
+            st.markdown("Ordvalet har betydelse. Omedvetet kan vissa ord avskräcka vissa från att söka. Tonalitet, bildval, hur arbetet beskrivs och hur företaget presenteras är också viktigt.")
+    st.checkbox("Håll kravlistan kort")
+    with st.expander('Läs mer'):
         st.markdown(''' Forskning visar att fler män än kvinnor svarar på 
     jobbannonser med långa kravlistor. För många krav kan avskräcka även 
     erfarna och kvalificerade kvinnor att söka.''')
-    with st.expander("Uppmuntran"):
+    st.checkbox("Uppmuntran")
+    with st.expander('Läs mer'):
         st.markdown('''Att berätta att företaget strävar mot större mångfald 
     är viktigt. Det är också bra att avsluta annonsen med att 
     uppmuntra läsaren att söka tjänsten.''')
-    with st.expander("Ge exempel"):
+    st.checkbox("Ge exempel")
+    with st.expander('Läs mer'):
         st.markdown('''Om inkludering är ett av företagets kärnvärden, 
     ge konkreta exempel på vad det innebär för medarbetarna; 
     flexibel arbetstid, möjligheten att arbeta deltid kan vara exempel.
     ''')
-    with st.expander("Störst effekt för vissa roller"):
+    st.checkbox("Störst effekt för vissa roller")
+    with st.expander('Läs mer'):
         st.markdown('''Det är framför allt i roller som domineras av män
     som utformningen av platsannonsen påverkar fler
     kvinnor att söka. När Tieto Evry reviderade platsannonser för 
@@ -118,7 +122,7 @@ st.text("")
 st.text("")
 st.text("")
 
-st.divider() 
+#st.divider() 
 
 
 #Vanligste orden
