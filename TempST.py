@@ -11,15 +11,11 @@ logo = Image.open('Logo3.png')
 df = pd.read_csv('Final_output_sve.csv')
 st.set_page_config(page_title='BiasBlaster | by MindMakers', page_icon='', layout='centered')
 
-
-
-
 st.image(logo)
 
 st.write('')
 st.write('')
 st.write('')
-
 
 
 tab1, tab2 = st.tabs(['Hur funkar det?', 'Testa din annons'])
@@ -39,8 +35,6 @@ with tab1:
         - Se de vanligaste manliga orden i jobbannonser
         - Do's and dont's
         ''')
-
-
 
 with tab2:
     annons_input = st.text_area('Testa hur könsneutral din annons är: ',
