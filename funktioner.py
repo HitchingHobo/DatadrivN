@@ -82,7 +82,7 @@ def testa_annons_df(data, text_column):
 
     return data
 
-## Uträkningar med df (3 st.)
+## Uträkningar med df (4 st.)
 def calculate_avg_df(df, group_by, column_to_avg):
 
     ## Räknar ut summan och medelvärdet av maskulina ord per företag
@@ -135,9 +135,24 @@ def top_20_ord(df, mask_ord):
 
     ## Räknar totalen och skickar tillbaka top 20 använda maskulina ord  
     mask_counter = Counter(mask_list)
-    mask_vanligaste_ord = mask_counter.most_common(20)
+    mask_vanligaste_ord = mask_counter.most_common(15)
 
     return mask_vanligaste_ord
+
+
+def get_rank(df, score, value):  
+
+    grouped_df = df.groupby(score).mean(numeric_only=True)
+    df_sorted = grouped_df.sort_values(score, ascending=True).reset_index(drop=False)
+    df_sorted = df_sorted[score] 
+    
+    for i in range(len(df_sorted)):
+        if value <= df_sorted[i]:
+            rank = (i+1)
+            break
+    return rank
+
+
 
 ## Cosine funktioner (4 st.)
 def preprocessor(text):

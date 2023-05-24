@@ -46,17 +46,26 @@ df = pd.read_csv('Final_output_sve.csv',
 
 
 
+value = 2
+pd.set_option('display.max_rows', None)
 
 
-import pandas as pd
 
-# Assuming your dataframe is called 'df'
-grouped_df = df.groupby('Genomsnitt_mask_ord')
 
-print(grouped_df.head(10))
 
-ranked_df = grouped_df.apply(lambda x: x.sort_values('Genomsnitt_mask_ord').reset_index(drop=True)).reset_index(drop=True)
-ranked_df['Rank'] = ranked_df.groupby('Genomsnitt_mask_ord').cumcount() + 1
+def get_rank(df, score, value):  
 
-# Print the ranked dataframe
-print(ranked_df[['Genomsnitt_mask_ord', 'Rank', 'employer.name']])
+    grouped_df = df.groupby(score).mean(numeric_only=True)
+    df_sorted = grouped_df.sort_values(score, ascending=True).reset_index(drop=False)
+    df_sorted = df_sorted[score] 
+    
+    for i in range(len(df_sorted)):
+        if value <= df_sorted[i]:
+            rank = (i+1)
+            break
+    return rank
+
+rank = get_rank(df, 'Genomsnitt_mask_ord', value)
+
+print(rank)
+print(type(rank))
