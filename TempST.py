@@ -83,18 +83,18 @@ with tab2:
                     st.write('Din annons har ', len(annons_results[0]), 'manliga ord i sig')
                 else:
                     st.write('Din annons har inga manliga ord i sig')
-                st.write('V rankar din annons som nr:', str(rank))
+                st.write('Vi rankar din annons som nr:', str(rank))
             if len(annons_input.split()) <= 0:
                 st.write('Klistra in din annons ovaför för att analysera den!')
             elif len(annons_input.split()) < 70:
                 st.write('Din annons är lite för kort för att göra en rättvis analys. Försök med minst 70 ord')
 
 
-    if len(annons_input.split()) >= 70:
-        st.divider()
-        if st.checkbox('Klicka för att visa din annonsengranne'):
-            st.write('Deras annons ser ut såhär: ')
-            st.write(annons_cosine_dict['similar_ad'])
+        if len(annons_input.split()) >= 70:
+            st.divider()
+            if st.checkbox('Klicka för att visa din annonsengranne'):
+                st.write('Deras annons ser ut såhär: ')
+                st.write(annons_cosine_dict['similar_ad'])
 
 st.divider()
 
