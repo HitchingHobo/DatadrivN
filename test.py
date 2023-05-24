@@ -48,43 +48,15 @@ df = pd.read_csv('Final_output_sve.csv',
 
 
 
+import pandas as pd
 
+# Assuming your dataframe is called 'df'
+grouped_df = df.groupby('Genomsnitt_mask_ord')
 
+print(grouped_df.head(10))
 
-# Assuming you have a DataFrame named 'df' with columns 'employer.name', 'Genomsnitt_mask_ord', and 'Rank'
+ranked_df = grouped_df.apply(lambda x: x.sort_values('Genomsnitt_mask_ord').reset_index(drop=True)).reset_index(drop=True)
+ranked_df['Rank'] = ranked_df.groupby('Genomsnitt_mask_ord').cumcount() + 1
 
-
-def get_rank(input_score):
-    # Group the DataFrame by rank
-    df['Rank'] = df['Genomsnitt_mask_ord'].rank(ascending=True, method='min')
-    grouped_df = df.groupby('Rank').agg({
-        'employer.name': 'first',
-        'Genomsnitt_mask_ord': 'first'
-    }).reset_index()
-
-    # Fetch the rank for input_score
-    rank = grouped_df.loc[grouped_df['Genomsnitt_mask_ord'] == input_score, 'Rank'].values[0]
-    return rank
-
-
-
-
-# Example usage
-# input_score = 0
-# rank = get_rank(input_score)
-
-# print(f"The input score of {input_score} ranks as {int(rank)}")
-
-
-# # Assuming you have a DataFrame named 'df' with columns 'Company', 'Description', 'Score', and 'Rank'
-
-# print(df[['employer.name', 'Genomsnitt_mask_ord', 'Rank']].head(10))
-
-# df = df[['employer.name', 'Genomsnitt_mask_ord', 'Rank', 'Annons_length']]
-
-
-# df = df.groupby('employer.name').mean(numeric_only=True)
-# df = df.sort_values(by=['Rank'], ascending=True)
-group_df = get_group(df)
-print(df)
-print(group_df)
+# Print the ranked dataframe
+print(ranked_df[['Genomsnitt_mask_ord', 'Rank', 'employer.name']])
