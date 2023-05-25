@@ -52,14 +52,14 @@ with tab2:
                         st.balloons()
                 else:
                     
-                    st.write('De maskulint vinklade ordeni din annons är: ')
+                    st.write('De maskulint vinklade orden i din annons är: ')
                     annons_results.append(set(annons_results[0]))
                     for ord in annons_results[2]:
                         count = annons_results[0].count(ord)
                         if count > 1:
-                            st.write(f"{ord} ({count} gånger)")
+                            st.write('-', f"{ord} ({count} gånger)")
                         else:
-                            st.write(ord)
+                            st.write('-', ord)
 
             else:         
                 top_5 = top_5_random(df, 'employer.name', 'Genomsnitt_mask_ord', 'Annons_length')
@@ -85,12 +85,12 @@ with tab2:
 
 
         if len(annons_input.split()) >= 70:
-            st.divider()
-            if st.checkbox('Klicka för att visa din annonsengranne'):
+            st.write('---')
+            if st.checkbox('Klicka för att visa din annonsgranne'):
                 st.write('Deras annons ser ut såhär: ')
                 st.write(annons_cosine_dict['similar_ad'])
 
-#st.divider()
+st.write('---')
 
 col1, col2 = st.columns(2)
 with col1:
@@ -123,7 +123,7 @@ with col1:
     projektledare blev det ingen skillnad, men ansökningarna från
     kvinnor ökade kraftigt för programmeringsroller som 
     domineras av män.''')
-#st.divider() 
+st.write('---') 
 with col2:
     #Vanligste orden
     st.write('Vanligaste manliga orden i jobbannonser')
