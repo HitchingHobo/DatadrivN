@@ -40,10 +40,10 @@ with tab1:
         hur pass inkluderande deras annons är genom analys, för att undvika manligt betingade ord. 
         På så vis kan man uppnå en mer jämställd arbetskår på företaget och gå i framkant för fler jämställda företag!
         
-        **Annonshjälpen erbjuder vägledning i form av att:**
+        **BiasBlaster erbjuder vägledning i form av att:**
         - Få din annons analyserad
         - Se de vanligaste manliga orden i jobbannonser
-        - Do's and dont's
+        - Checklista fär din annons
         ''')
 
 with tab2:
@@ -106,7 +106,7 @@ st.write('---')
 col1, col2 = st.columns(2)
 with col1:
         #Do's and don'ts 
-    st.subheader("Do's & Dont's")
+    st.subheader("Checklsita")
     st.checkbox("Välj rätt ord")
     with st.expander('Läs mer'):
         st.markdown("Ordvalet har betydelse. Välj neutrala ord när du kan! Förekomsten av maskulint kodade ord avskräcker kvinnor, medan feminint kodade ord inte påverkar manliga kandidater")
