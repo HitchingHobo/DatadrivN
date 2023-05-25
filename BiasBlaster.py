@@ -111,7 +111,7 @@ st.write('---')
 col1, col2 = st.columns(2)
 with col1:
         #Do's and don'ts 
-    st.subheader("Checklsita")
+    st.subheader("Checklista")
     check1 = st.checkbox("Välj rätt ord")
     with st.expander('Läs mer'):
         st.markdown("Ordvalet har betydelse. Välj neutrala ord när du kan! Förekomsten av maskulint kodade ord avskräcker kvinnor, medan feminint kodade ord inte påverkar manliga kandidater")
