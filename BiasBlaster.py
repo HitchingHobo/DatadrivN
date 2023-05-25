@@ -137,7 +137,6 @@ with col1:
     if check1 and check2 and check3 and check4 and check5:
         st.write('')
         st.write('')
-
         st.markdown('''**Bra jobbat! 
         Din annons är neutralt kodad och redo för publicering!**''')
 
