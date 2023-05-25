@@ -19,10 +19,10 @@ st.write('')
 
 
 tab1, tab2 = st.tabs(['Hur funkar det?', 'Testa din annons'])
-# lägga in en liten bild här? 
+
 
 with tab1:
-    st.markdown("***Hur funkar det?***") #ändra färg på texten?
+    st.markdown("***Hur funkar det?***") 
     st.markdown(
         '''
         Idag består techbranschen av **70% män**. Samtidigt upplever arbetsgivare omfattande svårigheter med rekryteringen av kvinnliga utvecklare.
@@ -96,33 +96,28 @@ col1, col2 = st.columns(2)
 with col1:
         #Do's and don'ts 
     st.subheader("Do's & Dont's")
-    st.checkbox("Ord spelar roll")
+    st.checkbox("Välj rätt ord")
     with st.expander('Läs mer'):
-        st.markdown("Ordvalet har betydelse. Omedvetet kan vissa ord avskräcka vissa från att söka. Tonalitet, bildval, hur arbetet beskrivs och hur företaget presenteras är också viktigt.")
+        st.markdown("Ordvalet har betydelse. Välj neutrala ord när du kan! Förekomsten av maskulint kodade ord avskräcker kvinnor, medan feminint kodade ord inte påverkar manliga kandidater")
     st.checkbox("Håll kravlistan kort")
     with st.expander('Läs mer'):
-        st.markdown(''' Forskning visar att fler män än kvinnor svarar på 
-        jobbannonser med långa kravlistor. För många krav kan avskräcka även 
+        st.markdown(''' Forskning visar att färre kvinnor än män svarar på 
+        jobbannonser med långa kravlistor. Kraven avskräcker 
         erfarna och kvalificerade kvinnor att söka.''')
-    st.checkbox("Uppmuntran")
+    st.checkbox("Undvik krav på år")
     with st.expander('Läs mer'):
-        st.markdown('''Att berätta att företaget strävar mot större mångfald 
-    är viktigt. Det är också bra att avsluta annonsen med att 
-    uppmuntra läsaren att söka tjänsten.''')
-    st.checkbox("Ge exempel")
+        st.markdown('''Specifierade år av erfarenhet avskräcker kvinnor att söka om dem inte uppnår
+         exakta år. Undik längd på arbetserfarenhet och använd andra beskrivande sätt''')
+    st.checkbox("Uppmärksamma insatser för inkludering!")
     with st.expander('Läs mer'):
         st.markdown('''Om inkludering är ett av företagets kärnvärden, 
     ge konkreta exempel på vad det innebär för medarbetarna; 
-    flexibel arbetstid, möjligheten att arbeta deltid kan vara exempel.
+    flexibel arbetstid, möjligheten att arbeta hemifrån osv.
     ''')
-    st.checkbox("Störst effekt för vissa roller")
+    st.checkbox("Säkerställ kravprofilen mot bias")
     with st.expander('Läs mer'):
-        st.markdown('''Det är framför allt i roller som domineras av män
-    som utformningen av platsannonsen påverkar fler
-    kvinnor att söka. När Tieto Evry reviderade platsannonser för 
-    projektledare blev det ingen skillnad, men ansökningarna från
-    kvinnor ökade kraftigt för programmeringsroller som 
-    domineras av män.''')
+        st.markdown('''Nämner dukön, sexuell läggning, religion, funktionsnedsättning, etnisk
+         tillhörighet? Gör om!''')
 st.write('---') 
 with col2:
     #Vanligste orden
