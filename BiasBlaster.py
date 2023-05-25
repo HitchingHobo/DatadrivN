@@ -135,7 +135,11 @@ with col1:
         st.markdown('''Nämner du kön, sexuell läggning, religion, funktionsnedsättning, etnisk
          tillhörighet? Gör om!''')
     if check1 and check2 and check3 and check4 and check5:
-        st.markdown('''**Bra jobbat! Din annons är neutralt kodad och redo för prublicering!**''')
+        st.write('')
+        st.write('')
+
+        st.markdown('''**Bra jobbat! 
+        Din annons är neutralt kodad och redo för publicering!**''')
 
 st.write('---') 
 with col2:
