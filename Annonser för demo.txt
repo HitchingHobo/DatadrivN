@@ -43,40 +43,41 @@ Spännande! Hur du än ansöker så ser vi fram emot att lära känna dig mer.
 Annons 2 utan maskulina ord
 
 
-Om jobbet Arbetsuppgifter - Programmering i alla dess former! 
-T ex parprogrammering, mobprogrammering eller kanske något nytt kreativt som du vill utforska? 
-- Delta i  gällande produkter, features, arkitektur och affärsmål.
-- Lärande och kunskapsdelning i både team och organisation.
-Är du redo för något intressant? På SBAB jobbar vi värderingsdrivet. Wow! Hoppas vi att du tänker. 
-Våra värderingar är viktiga för oss på riktigt! De handlar om att jobba smart med fart, ta ansvar 
-hela vägen, vara stolta proffs och att lyckas tillsammans. Faktum är att värderingarna hjälper oss 
-att fatta och vi vill att du gör detsamma hos oss. De hjälper dig i rätt riktning, 
-stöttar att ta egna initiativ, ha roligt tillsammans, jobba ihop och bidra till att våra kunder 
-får en bättre boendeekonomi. Fortfarande intresserad? Välkommen! Att jobba som Utvecklare
-Vill du vara en del i ett autonomt team som arbetar med aktuell teknik? Hos oss på SBAB får du 
-möjlighet att vara med och utveckla bankens egna system och applikationer!
-Du blir en del av ett nytänkande team som har ett nära samarbete med andra team 
-och våra användare. I denna roll får du även delta i utforskande och stagande inom 
-produkter, features, arkitektur och mål. Vi tror att du är en lagspelare som gillar att förvandla 
-bra idéer till features och har en balans mellan kvalitet och tempo. Du är van vid agila arbetssätt, 
-så som Scrum & Kanban - eller kanske en kombination av båda?
-Varje team äger sin domän och ansvarar för de mikrotjänster som agerar inom den. Saknar du erfarenhet 
-av några av våra tekniker eller har du kunskaper inom andra språk eller verktyg så är det inga problem, 
-vi lär oss gärna och vill att du ska utvecklas med oss!
-Vår teknikstack innehåller:  Mikrotjänster i Kotlin, Java och Spring Boot, som körs på Kubernetes
-- Web-appar i TypeScript med olika ramverk som tex React - Design patterns som tex Event sourcing och CQRS
-- Meddelande-driven kommunikation via Kafka och Avro - GraphQL och REST baserade APIer
-Du får titeln ”Fullstack Developer”, men vi vet att ingen är expert på allt. Det vi menar är att 
-man är en utvecklare som känner sig trygg inom backend eller frontend, men samtidigt är nyfiken 
-och vill lära sig mer där man känner sig mindre trygg. Vi kommer att uppmuntra dig att gå utanför 
-din komfortzon och pröva nya teknologier. Att växa som utvecklare ingår i vårt dagliga arbete, 
-men även under mer kreativa former som Hackdays och Devjams.
-I det här avsnittet gäster vi Kodsnack under ledning av Fredrik Björeman. Ni får träffa fyra 
-utvecklare som börjar med att prata om likheter och skillnader mellan SBAB och Booli. Därefter 
-om hur man avvecklar äldre monoliter på ett planerat och konstruktivt sätt, mikrotjänsters 
-fördelar och problem och mycket mer. Låter det intressant, kontakta oss så berättar vi mer.
-Har du check på allt? - Lagspelare - Nyfiken - Analytisk - Initiativtagande - Annars då?
-Gillar du oss, och tror att du kan bidra, är vårt tips att inte vänta för länge med att 
-skicka in CV eller LinkedIn-profil. Har du andra idéer på hur du kan visa vem du är? 
-Spännande! Hur du än ansöker så ser vi fram emot att lära känna dig mer.
+Om jobbet
+Har du kommit en bit i din karriär som systemutvecklare och hunnit arbeta upp erfarenhet inom olika tekniker, 
+ramverk och plattformar?
+
+Vad vi letar efter:
+Dig som arbetat med utveckling i minst fem år dock vet vi av erfarenhet att dina tekniska 
+och personliga egenskaper är mest viktiga så om du känner att du har erfarenheter som är 
+motsvarande så är du välkommen att söka. Du är en person som har en passion för problemlösning 
+och utveckling, har förmågan att arbeta i team och inspirera och inspireras av andra, skapa förtroende 
+och ta ägandeskap i såväl kundsammanhang som för tekniken. 
+Dina erfarenheter:
+ - Utveckling i C# och eller Java i motsvarande fem år
+ - Ramverk såsom Node, Angular, React, Svelte
+ - Cloud-tjänster inom Azure, AWS och Google Cloud
+ - Då flera av våra uppdrag kräver svenskakunskaper vill vi att du pratar och skriver svenska obehindrat.
+Vad vi på Sogeti erbjuder:
+Vi erbjuder en trygg anställning med fokus på våra medarbetare och balans i livet.
+ - Våra förmåner
+Här hittar du en översikt av de förmåner vi erbjuder på Sogeti.
+ - Din utveckling - Become your best
+Vårt mål är att den som är anställd hos oss ska vara på en ständig utvecklingsresa och bli den 
+bästa versionen av sig själv.
+ - Topp 3 Sverige Bästa Arbetsgivare
+Sogeti kom på tredje plats i Universeums ranking Sveriges Bästa Arbetsgivare 2022. En utmärkelse 
+vi är extra stolta över då det är en mätning från de som känner oss allra bäst - våra fantastiska sogetiare!
+Hoppas att vi hörs!
+Sogeti Sverige, en del av Capgemini-koncernen, med 21 kontor och 1300 medarbetare, skapar affärsvärde 
+med teknologi för organisationer som behöver införa innovation snabbt och som vill ha en lokal partner 
+med global skalbarhet. Med en hands-on-kultur och närhet till kunderna, implementerar Sogeti lösningar 
+som hjälper organisationer att arbeta snabbare, bättre och smartare. Genom att kombinera agilitet och 
+snabb implementation via en DevOps-ansats, levererar Sogeti innovativa lösningar inom test- och kvalitetssäkring, 
+molnet och systemutveckling, förstärkta av AI, data och automation.  
+Alla människor ska ha samma möjligheter. Inte minst i sitt arbete, därför är jämställdhet en 
+självklarhet för oss och vi tar mängder av initiativ för att främja detta, bland annat genom #addher - 
+ett av Sveriges största nätverk för kvinnor i IT-branschen.
+
+
 
