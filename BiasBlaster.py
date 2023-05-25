@@ -143,7 +143,7 @@ with col1:
 st.write('---') 
 with col2:
     #Vanligste orden
-    st.write('Vanligaste manliga orden i jobbannonser')
+    st.write('De vanligaste manskulint kodade orden i annonser')
     barchart_data = pd.DataFrame(top_20_ord(df, 'Mask_ord'), columns=['Ord', 'Antal'])
     #st.bar_chart(barchart_data, x='Antal', y='Ord')
 
