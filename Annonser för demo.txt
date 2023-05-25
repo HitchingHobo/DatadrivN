@@ -45,7 +45,7 @@ Annons 2 utan maskulina ord
 
 Om jobbet Arbetsuppgifter - Programmering i alla dess former! 
 T ex parprogrammering, mobprogrammering eller kanske något nytt kreativt som du vill utforska? 
-- Aktivt delta i  gällande produkter, features, arkitektur och affärsmål.
+- Delta i  gällande produkter, features, arkitektur och affärsmål.
 - Lärande och kunskapsdelning i både team och organisation.
 Är du redo för något intressant? På SBAB jobbar vi värderingsdrivet. Wow! Hoppas vi att du tänker. 
 Våra värderingar är viktiga för oss på riktigt! De handlar om att jobba smart med fart, ta ansvar 
@@ -56,7 +56,7 @@ får en bättre boendeekonomi. Fortfarande intresserad? Välkommen! Att jobba so
 Vill du vara en del i ett autonomt team som arbetar med aktuell teknik? Hos oss på SBAB får du 
 möjlighet att vara med och utveckla bankens egna system och applikationer!
 Du blir en del av ett nytänkande team som har ett nära samarbete med andra team 
-och våra användare. I denna roll får du även aktivt delta i utforskande och stagande inom 
+och våra användare. I denna roll får du även delta i utforskande och stagande inom 
 produkter, features, arkitektur och mål. Vi tror att du är en lagspelare som gillar att förvandla 
 bra idéer till features och har en balans mellan kvalitet och tempo. Du är van vid agila arbetssätt, 
 så som Scrum & Kanban - eller kanske en kombination av båda?
