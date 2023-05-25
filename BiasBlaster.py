@@ -3,9 +3,19 @@ import pandas as pd
 from funktioner import *
 import altair as alt
 from PIL import Image
+from streamlit_lottie import st_lottie
+import requests 
 
 
 logo = Image.open('Logo3.png')
+
+def load_lottieurl(url):
+    r = requests.get(url)
+    if r.status_code != 200:
+        return None
+    return r.json()
+
+lottie_celebrate = load_lottieurl('https://assets5.lottiefiles.com/packages/lf20_kfl4ksd9.json')
 
 
 df = pd.read_csv('Final_output_sve.csv')
@@ -49,6 +59,7 @@ with tab2:
                 if len(annons_results[0]) < 1:
                     st.success('Bra jobbat! Din annons innehåller inga manliga ord.')
                     if st.button('Fira med en ballong!'):
+                        st_lottie(lottie_celebrate, height=300, key='celebrate')
                         st.balloons()
                 else:
                     
