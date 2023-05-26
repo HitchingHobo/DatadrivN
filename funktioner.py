@@ -135,7 +135,7 @@ def top_20_ord(df, mask_ord):
 
     ## Räknar totalen och skickar tillbaka top 20 använda maskulina ord  
     mask_counter = Counter(mask_list)
-    mask_vanligaste_ord = mask_counter.most_common(15)
+    mask_vanligaste_ord = mask_counter.most_common(18)
 
     return mask_vanligaste_ord
 
