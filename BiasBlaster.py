@@ -108,6 +108,10 @@ with col1:
         #Do's and don'ts 
     st.subheader("Checklista")
     st.checkbox("Välj rätt ord")
+=======
+    st.subheader("Checklsita")
+    check1 = st.checkbox("Välj rätt ord")
+>>>>>>> parent of f0d6bec (Update BiasBlaster.py)
     with st.expander('Läs mer'):
         st.markdown("Ordvalet har betydelse. Välj neutrala ord när du kan! Förekomsten av maskulint kodade ord avskräcker kvinnor, medan feminint kodade ord inte påverkar manliga kandidater")
     st.checkbox("Håll kravlistan kort")
