@@ -7,7 +7,7 @@ from streamlit_lottie import st_lottie
 import requests 
 
 
-logo = Image.open('Logo.png')
+logo = Image.open('Logo3.png')
 
 def load_lottieurl(url):
     r = requests.get(url)
