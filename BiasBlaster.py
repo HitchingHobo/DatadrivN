@@ -7,7 +7,7 @@ from streamlit_lottie import st_lottie
 import requests 
 
 
-logo = Image.open('Logo3.png')
+logo = Image.open('Logo.png')
 
 def load_lottieurl(url):
     r = requests.get(url)
@@ -43,63 +43,68 @@ with tab1:
         **BiasBlaster erbjuder vägledning i form av att:**
         - Få din annons analyserad
         - Se de vanligaste manliga orden i jobbannonser
-        - Checklista
+        - Checklista fär din annons
         ''')
 
 with tab2:
     annons_input = st.text_area('Testa hur könsneutral din annons är: ',
                                     height=250,
                                     placeholder='Klistra in här...')
-    if st.checkbox('Analysera annons'):
-        annons_results = testa_annons(annons_input)
-        annons_cosine_dict = calc_similarity(annons_input, df, 'employer.name', 'description.text')
-        col1, col2 = st.columns(2)
-        with col2:
-            if len(annons_input.split()) >= 70:
-                if len(annons_results[0]) < 1:
-                    st.success('Bra jobbat! Din annons innehåller inga manliga ord.')
-                    if st.button('Fira med en ballong!'):
-                        st_lottie(lottie_celebrate, height=300, key='celebrate')
-                        st.balloons()
-                else:
-                    
-                    st.write('De maskulint vinklade orden i din annons är: ')
-                    annons_results.append(set(annons_results[0]))
-                    for ord in annons_results[2]:
-                        count = annons_results[0].count(ord)
-                        if count > 1:
-                            st.write('-', f"{ord} ({count} gånger)")
-                        else:
-                            st.write('-', ord)
-
-            else:         
-                top_5 = top_5_random(df, 'employer.name', 'Genomsnitt_mask_ord', 'Annons_length')
-                st.write('''Här är fem förebilder som skriver annonser utan ett enda maskulint kodat ord, 
-                    **bra jobbat!**''')
-                for i in top_5['employer.name']:
-                    st.write('-', i)
-        with col1:
-            if len(annons_input.split()) >= 70:
-                perc_dist = (math.pi - math.acos(annons_cosine_dict['similarity_score']))  * 100 / math.pi
-                st.write('Din annons är mest lik en annons från ', annons_cosine_dict['employer'])
-                st.write('Era annonsers liknar varandra till ungefär ', str(math.trunc(perc_dist)), '%')
-                rank = get_rank(df, 'Genomsnitt_mask_ord', len(annons_results[0]))
-                if len(annons_results[0]) > 0:
-                    st.write('Din annons har ', len(annons_results[0]), 'manliga ord i sig')
-                else:
-                    st.write('Din annons har inga manliga ord i sig')
-                st.write('Vi rankar din annons som nr:', str(rank))
-            if len(annons_input.split()) <= 0:
-                st.write('Klistra in din annons ovaför för att analysera den!')
-            elif len(annons_input.split()) < 70:
-                st.write('Din annons är lite för kort för att göra en rättvis analys. Försök med minst 70 ord')
-
-
+    #if st.checkbox('Analysera annons'):
+    annons_results = testa_annons(annons_input)
+    annons_cosine_dict = calc_similarity(annons_input, df, 'employer.name', 'description.text')
+    col1, col2 = st.columns(2)
+    with col2:
         if len(annons_input.split()) >= 70:
-            st.write('---')
-            if st.checkbox('Klicka för att visa din annonsgranne'):
-                st.write('Deras annons ser ut såhär: ')
-                st.write(annons_cosine_dict['similar_ad'])
+            if len(annons_results[0]) < 1:
+                st.success('Bra jobbat! Din annons innehåller inga manliga ord.')
+                if st.button('Fira med en ballong!'):
+                    #st_lottie(lottie_celebrate, height=300, key='celebrate')
+                    st.balloons()
+            else:
+                
+                st.write('De maskulint vinklade orden i din annons är: ')
+                annons_results.append(set(annons_results[0]))
+                for ord in annons_results[2]:
+                    count = annons_results[0].count(ord)
+                    if count > 1:
+                        st.write('-', f"{ord} ({count} gånger)")
+                    else:
+                        st.write('-', ord)
+
+        else:         
+            top_5 = top_5_random(df, 'employer.name', 'Genomsnitt_mask_ord', 'Annons_length')
+            st.write('''Här är fem förebilder som skriver annonser utan ett enda maskulint kodat ord, 
+                **bra jobbat!**''')
+            for i in top_5['employer.name']:
+                st.write('-', i)
+    with col1:
+        if len(annons_input.split()) >= 70:
+            if len(annons_results[0]) > 0:
+                st.write('Din annons har ', str(len(annons_results[0])), 'manliga ord i sig')
+            else:
+                st.write('Din annons har inga manliga ord i sig')
+            rank = get_rank(df, 'Genomsnitt_mask_ord', len(annons_results[0]))                
+            st.write('Vi rankar din annons som nr:', str(rank))
+            rank = get_rank(df, 'Genomsnitt_mask_ord', len(annons_results[0]))
+            perc_dist = (math.pi - math.acos(annons_cosine_dict['similarity_score']))  * 100 / math.pi
+            st.write('Din annons är mest lik en annons från ', annons_cosine_dict['employer'])
+            st.write('Era annonsers liknar varandra till ungefär ', str(math.trunc(perc_dist)), '%')
+            
+
+
+
+        if len(annons_input.split()) <= 0:
+            st.write('Klistra in din annons ovaför för att analysera den!')
+        elif len(annons_input.split()) < 70:
+            st.write('Din annons är lite för kort för att göra en rättvis analys. Försök med minst 70 ord')
+
+
+    if len(annons_input.split()) >= 70:
+        st.write('---')
+        if st.checkbox('Klicka för att visa din annonsgranne'):
+            st.write('Deras annons ser ut såhär: ')
+            st.write(annons_cosine_dict['similar_ad'])
 
 st.write('---')
 
@@ -107,37 +112,40 @@ col1, col2 = st.columns(2)
 with col1:
         #Do's and don'ts 
     st.subheader("Checklista")
-    st.checkbox("Välj rätt ord")
-=======
-    st.subheader("Checklsita")
     check1 = st.checkbox("Välj rätt ord")
->>>>>>> parent of f0d6bec (Update BiasBlaster.py)
     with st.expander('Läs mer'):
         st.markdown("Ordvalet har betydelse. Välj neutrala ord när du kan! Förekomsten av maskulint kodade ord avskräcker kvinnor, medan feminint kodade ord inte påverkar manliga kandidater")
-    st.checkbox("Håll kravlistan kort")
+    check2 = st.checkbox("Håll kravlistan kort")
     with st.expander('Läs mer'):
         st.markdown(''' Forskning visar att färre kvinnor än män svarar på 
         jobbannonser med långa kravlistor. Kraven avskräcker 
         erfarna och kvalificerade kvinnor att söka.''')
-    st.checkbox("Undvik krav på år")
+    check3 = st.checkbox("Undvik krav på år")
     with st.expander('Läs mer'):
         st.markdown('''Specifierade år av erfarenhet avskräcker kvinnor att söka om dem inte uppnår
          exakta år. Undik längd på arbetserfarenhet och använd andra beskrivande sätt''')
-    st.checkbox("Uppmärksamma insatser för inkludering!")
+    check4 = st.checkbox("Uppmärksamma insatser för inkludering!")
     with st.expander('Läs mer'):
         st.markdown('''Om inkludering är ett av företagets kärnvärden, 
     ge konkreta exempel på vad det innebär för medarbetarna; 
     flexibel arbetstid, möjligheten att arbeta hemifrån osv.
     ''')
-    st.checkbox("Säkerställ kravprofilen mot bias")
+    check5 = st.checkbox("Säkerställ kravprofilen mot bias")
     with st.expander('Läs mer'):
-        st.markdown('''Nämner dukön, sexuell läggning, religion, funktionsnedsättning, etnisk
+        st.markdown('''Nämner du kön, sexuell läggning, religion, funktionsnedsättning, etnisk
          tillhörighet? Gör om!''')
+    if check1 and check2 and check3 and check4 and check5:
+        st.write('')
+        st.write('')
+        st.markdown('''**Bra jobbat! 
+        Din annons är neutralt kodad och redo för publicering!**''')
+
 st.write('---') 
 with col2:
     #Vanligste orden
-    st.write('Vanligaste manligt kodade orden i jobbannonser')
+    st.write('De vanligaste manskulint kodade orden i annonser')
     barchart_data = pd.DataFrame(top_20_ord(df, 'Mask_ord'), columns=['Ord', 'Antal'])
+    #st.bar_chart(barchart_data, x='Antal', y='Ord')
 
     source = barchart_data
 
@@ -147,5 +155,7 @@ with col2:
         ).configure_mark(
             color='red' )
 
-
     st.altair_chart(base.mark_bar(), use_container_width=True)
+
+    if check1 and check2 and check3 and check4 and check5:
+        st_lottie(lottie_celebrate, height=300, key='celebrate')
