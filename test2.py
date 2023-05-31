@@ -143,5 +143,42 @@ def re_vectorize(modified_df, input_annons):
     return output_dict
 
 #print(re_vectorize(df, sample_annons))
-print(annons_res)
+#print(annons_res)
 #print(calc_similarity3(sample_annons, len(annons_res[0]), df, 'employer.name', 'description.text', 'Mask_score'))
+
+
+import pandas as pd
+import pickle
+
+# 1. When initially vectorizing the dataframe, assign a unique identifier to each row
+# df['UniqueID'] = range(len(df))
+
+# # Vectorize the dataframe and save it along with the unique identifier column
+# preprocessed_texts = df[text_column].apply(preprocessor)
+# vectors, vectorizer = vectorize_texts(preprocessed_texts)
+
+# vectorized_data = {
+#     'vectors': vectors,
+#     'vectorizer': vectorizer,
+#     'unique_id': df['UniqueID']
+# }
+
+# with open('vectorized_data.pkl', 'wb') as f:
+#     pickle.dump(vectorized_data, f)
+
+# 3. When fetching the vectorized data for cosine similarity calculations on the modified dataframe
+# Load the vectorized data and the modified dataframe
+with open('vectorized_data.pkl', 'rb') as f:
+    vectorized_data = pickle.load(f)
+
+modified_df = pd.read_csv('modified_dataframe.csv')  # Load the modified dataframe
+
+# Merge the vectorized data with the modified dataframe using the unique identifier column
+merged_df = pd.merge(modified_df, vectorized_data['unique_id'], on='UniqueID')
+
+# Extract the vectorized data from the merged dataframe
+vectors = merged_df['vectors']
+vectorizer = vectorized_data['vectorizer']
+
+# Use the vectors for cosine similarity calculations
+# ...

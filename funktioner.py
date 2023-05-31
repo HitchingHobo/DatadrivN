@@ -204,9 +204,10 @@ def prepare_df_for_cosine(df, text_column):
     ## Sparar vectorized data med pickle för framtida jämförelse med cosine
     vectorized_data = {
         'vectors': vectors,
-        'vectorizer': vectorizer}
+        'vectorizer': vectorizer,
+        'unique_id': df['UniqueID']}
     
-    with open('vectorized_data.pkl', 'wb') as f:
+    with open('vectorized_data_id.pkl', 'wb') as f:
         pickle.dump(vectorized_data, f)
 
 
@@ -238,11 +239,14 @@ def calc_similarity(input_annons, data, employer_name, annons_text):
 def calc_similarity2(input_annons, input_annons_score, data, employer_name, annons_text, mask_score):
 
     ## Hämtar sparade vectorized data med pickle
-    with open('vectorized_data.pkl', 'rb') as f:
+    with open('vectorized_data_id.pkl', 'rb') as f:
         vectorized_data = pickle.load(f)
 
     data.drop(data[data[mask_score] >= input_annons_score].index, inplace = True)
 
+    merged_df = pd.merge(data, vectorized_data['unique_id'], on='UniqueID')
+    vectors = merged_df['vectors']
+    vectorizer = vectorized_data['vectorizer']
     ## Preppar input annonsen och vectorizerar den
     input_vector = vectorized_data['vectorizer'].transform([preprocessor(input_annons)])
     sim_scores = cosine_similarity(input_vector, vectorized_data['vectors']).flatten()
@@ -258,5 +262,6 @@ def calc_similarity2(input_annons, input_annons_score, data, employer_name, anno
     output_dict['similarity_score'] = sim_score
     output_dict['employer'] = most_similar_other_column
     output_dict['similar_ad'] = data[annons_text][most_similar_index]
-    
+    output_dict['mask_score'] = data['Mask_score'][most_similar_index]
+
     return output_dict
