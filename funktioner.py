@@ -235,3 +235,28 @@ def calc_similarity(input_annons, data, employer_name, annons_text):
     return output_dict
 
 
+def calc_similarity2(input_annons, input_annons_score, data, employer_name, annons_text, mask_score):
+
+    ## Hämtar sparade vectorized data med pickle
+    with open('vectorized_data.pkl', 'rb') as f:
+        vectorized_data = pickle.load(f)
+
+    data.drop(data[data[mask_score] >= input_annons_score].index, inplace = True)
+
+    ## Preppar input annonsen och vectorizerar den
+    input_vector = vectorized_data['vectorizer'].transform([preprocessor(input_annons)])
+    sim_scores = cosine_similarity(input_vector, vectorized_data['vectors']).flatten()
+    
+    ## Sorterar och hämtar mest liknande annons och företag
+    most_similar_index = sim_scores.argsort()[-1]
+    most_similar_other_column = data[employer_name][most_similar_index]
+    sim_score = sim_scores[most_similar_index]
+    
+
+    ## Skapar en dict som output
+    output_dict = {}
+    output_dict['similarity_score'] = sim_score
+    output_dict['employer'] = most_similar_other_column
+    output_dict['similar_ad'] = data[annons_text][most_similar_index]
+    
+    return output_dict
