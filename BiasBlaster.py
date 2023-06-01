@@ -36,7 +36,7 @@ with tab1:
     st.markdown(
         '''
         Idag består techbranschen av **70% män**. Samtidigt upplever arbetsgivare omfattande svårigheter med rekryteringen av kvinnliga utvecklare.
-        Med vår databas bestående av 5432 jobbannonser har vi skapat en tjänst där rekryterare kan testa 
+        Med vår databas bestående av 5442 jobbannonser har vi skapat en tjänst där rekryterare kan testa 
         hur pass inkluderande deras annons är genom analys, för att undvika manligt betingade ord. 
         På så vis kan man uppnå en mer jämställd arbetskår på företaget och gå i framkant för fler jämställda företag!
         
@@ -52,7 +52,7 @@ with tab2:
                                     placeholder='Klistra in här...')
     #if st.checkbox('Analysera annons'):
     annons_results = testa_annons(annons_input)
-    annons_cosine_dict = calc_similarity(annons_input, df, 'employer.name', 'description.text')
+    annons_cosine_dict = calc_similarity2(annons_input, df, 'employer.name', 'description.text')
     col1, col2 = st.columns(2)
     with col2:
         if len(annons_input.split()) >= 70:
@@ -85,7 +85,7 @@ with tab2:
             else:
                 st.write('Din annons har inga manliga ord i sig')
             rank = get_rank(df, 'Genomsnitt_mask_ord', len(annons_results[0]))                
-            st.write('Vi rankar din annons som nr:', str(rank))
+            st.write('Vi rankar din annons som nr:', str(rank), 'av 700 företags genomsnittspoäng' )
             rank = get_rank(df, 'Genomsnitt_mask_ord', len(annons_results[0]))
             perc_dist = (math.pi - math.acos(annons_cosine_dict['similarity_score']))  * 100 / math.pi
             st.write('Din annons är mest lik en annons från ', annons_cosine_dict['employer'])
@@ -143,7 +143,7 @@ with col1:
 st.write('---') 
 with col2:
     #Vanligste orden
-    st.write('De vanligaste manskulint kodade orden i annonser')
+    st.write('De vanligaste manskulint kodade orden från 5442 annonser')
     barchart_data = pd.DataFrame(top_20_ord(df, 'Mask_ord'), columns=['Ord', 'Antal'])
     #st.bar_chart(barchart_data, x='Antal', y='Ord')
 
