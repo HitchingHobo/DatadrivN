@@ -30,7 +30,7 @@ st.write('')
 
 tab1, tab2 = st.tabs(['Hur funkar det?', 'Testa din annons'])
 
-
+## Välkomsttext
 with tab1:
     st.markdown("***Hur funkar det?***") 
     st.markdown(
@@ -47,22 +47,22 @@ with tab1:
         ''')
 
 with tab2:
+    ## Ruta för annonsanalys
     annons_input = st.text_area('Testa hur könsneutral din annons är: ',
                                     height=250,
                                     placeholder='Klistra in här...')
-    #if st.checkbox('Analysera annons'):
     annons_results = testa_annons(annons_input)
     annons_cosine_dict = calc_similarity2(annons_input, df, 'employer.name', 'description.text')
     col1, col2 = st.columns(2)
     with col2:
+        ## Positivt resultat av analysen
         if len(annons_input.split()) >= 70:
             if len(annons_results[0]) < 1:
                 st.success('Bra jobbat! Din annons innehåller inga manliga ord.')
                 if st.button('Fira med en ballong!'):
-                    #st_lottie(lottie_celebrate, height=300, key='celebrate')
                     st.balloons()
             else:
-                
+                ## Negativt resultat av analysen    
                 st.write('De maskulint vinklade orden i din annons är: ')
                 annons_results.append(set(annons_results[0]))
                 for ord in annons_results[2]:
@@ -72,6 +72,7 @@ with tab2:
                     else:
                         st.write('-', ord)
 
+        ## Innan annonse klistras in ser man 5 företag som skriver könsneutralt
         else:         
             top_5 = top_5_random(df, 'employer.name', 'Genomsnitt_mask_ord', 'Annons_length')
             st.write('''Här är fem förebilder som skriver annonser utan ett enda maskulint kodat ord, 
@@ -79,6 +80,8 @@ with tab2:
             for i in top_5['employer.name']:
                 st.write('-', i)
     with col1:
+        
+        ## Visa resultatet
         if len(annons_input.split()) >= 70:
             if len(annons_results[0]) > 0:
                 st.write('Din annons har ', str(len(annons_results[0])), 'manliga ord i sig')
@@ -89,17 +92,17 @@ with tab2:
             rank = get_rank(df, 'Genomsnitt_mask_ord', len(annons_results[0]))
             perc_dist = (math.pi - math.acos(annons_cosine_dict['similarity_score']))  * 100 / math.pi
             st.write('Din annons är mest lik en annons från ', annons_cosine_dict['employer'])
-            st.write('Era annonsers liknar varandra till ungefär ', str(math.trunc(perc_dist)), '%')
+            st.write('Era annonsers likhetspoäng är ', str(math.trunc(perc_dist)), 'av 100')
             
 
 
-
+        ## Felmeddelanden om annonsen saknas eller är för kort
         if len(annons_input.split()) <= 0:
             st.write('Klistra in din annons ovaför för att analysera den!')
         elif len(annons_input.split()) < 70:
             st.write('Din annons är lite för kort för att göra en rättvis analys. Försök med minst 70 ord')
 
-
+    ## Visa annonsgrannen
     if len(annons_input.split()) >= 70:
         st.write('---')
         if st.checkbox('Klicka för att visa din annonsgranne'):
@@ -110,7 +113,7 @@ st.write('---')
 
 col1, col2 = st.columns(2)
 with col1:
-        #Do's and don'ts 
+    ## Checklistor med inforuta för varje punkt
     st.subheader("Checklista")
     check1 = st.checkbox("Välj rätt ord")
     with st.expander('Läs mer'):
@@ -142,11 +145,11 @@ with col1:
 
 st.write('---') 
 with col2:
-    #Vanligste orden
+    ## Vanligste manliga orden
     st.write('De vanligaste manskulint kodade orden från 5442 annonser')
-    barchart_data = pd.DataFrame(top_20_ord(df, 'Mask_ord'), columns=['Ord', 'Antal'])
-    #st.bar_chart(barchart_data, x='Antal', y='Ord')
 
+    ## Barchart
+    barchart_data = pd.DataFrame(top_20_ord(df, 'Mask_ord'), columns=['Ord', 'Antal'])
     source = barchart_data
 
     base = alt.Chart(source).mark_bar().encode(
@@ -157,5 +160,6 @@ with col2:
 
     st.altair_chart(base.mark_bar(), use_container_width=True)
 
+    ## Medalj om alla checklistor är avbockade
     if check1 and check2 and check3 and check4 and check5:
         st_lottie(lottie_celebrate, height=300, key='celebrate')

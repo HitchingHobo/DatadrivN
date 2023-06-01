@@ -83,7 +83,6 @@ def testa_annons_df(data, text_column):
 
     return data
 
-
 ## Uträkningar med df (4 st.)
 def calculate_avg_df(df, group_by, column_to_avg):
 
@@ -99,15 +98,19 @@ def calculate_avg_df(df, group_by, column_to_avg):
 
 
 def top_5_random(df, employer_name, genomsnitt_mask_ord, annons_length):
+    ## Grupperar df efter företag
     grouped_df = df.groupby(employer_name).mean(numeric_only=True)
 
     target_value = 8
 
+    ## Räknar ut skillnaden mellan genomsnittet och target_value
     grouped_df['difference'] = abs(grouped_df[genomsnitt_mask_ord] - target_value)
 
+    ## Sorterar och tar bort alla annonser som är kortare än 150 ord
     df_sorted = grouped_df.sort_values(genomsnitt_mask_ord, ascending=True).reset_index(drop=False)
     df_sorted = df_sorted.drop(df_sorted[df_sorted[annons_length] < 150].index)
 
+    ## Tar fram 5 slumpmässiga annonser som har ett genomsnitt på 0 maskulina ord
     top_5_random = df_sorted[df_sorted[genomsnitt_mask_ord] == 0].sample(n=5)
 
     return top_5_random
@@ -144,16 +147,17 @@ def top_20_ord(df, mask_ord):
 
 def get_rank(df, score, value):  
 
+    ## Grupperar df efter antal maskulina ord
     grouped_df = df.groupby(score).mean(numeric_only=True)
     df_sorted = grouped_df.sort_values(score, ascending=True).reset_index(drop=False)
     df_sorted = df_sorted[score] 
     
+    ## Räknar ut ranken för en viss annons
     for i in range(len(df_sorted)):
         if value <= df_sorted[i]:
             rank = (i+1)
             break
     return rank
-
 
 ## Cosine funktioner (4 st.)
 def preprocessor(text):
@@ -198,13 +202,14 @@ def vectorize_texts(texts):
 
 def prepare_df_for_cosine_no_mask(df, text_column):
     
+    ## Tar bort alla annonser som har maskulina ord
     df_no_mask = df[df.Mask_score == 0]
 
     ## Preppar en texten från df för cosine similarity
     preprocessed_texts = df_no_mask[text_column].apply(preprocessor)
     vectors, vectorizer = vectorize_texts(preprocessed_texts)
     
-    ## Sparar vectorized data med pickle för framtida jämförelse med cosine
+    ## Sparar vectorized data med pickle för bättre prestanda för användaren
     vectorized_data = {
         'vectors': vectors,
         'vectorizer': vectorizer}
@@ -214,10 +219,6 @@ def prepare_df_for_cosine_no_mask(df, text_column):
 
 
 def calc_similarity2(input_annons, data, employer_name, annons_text):
-
-
-
-
 
     ## Hämtar sparade vectorized data med pickle
     with open('vectorized_data_no_mask.pkl', 'rb') as f:
@@ -240,7 +241,6 @@ def calc_similarity2(input_annons, data, employer_name, annons_text):
     output_dict['similar_ad'] = data[annons_text][most_similar_index]
     
     return output_dict
-
 
 ## Utbytta funktioner, anänds ej längre (2 st.)
 def prepare_df_for_cosine(df, text_column):
