@@ -1,5 +1,5 @@
 scikit-learn
-nltk
+nltk==3.8.1
 collections
 pandas
 itertools
