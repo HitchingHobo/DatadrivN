@@ -13,6 +13,7 @@ import math
 import re
 
 nltk.download('stopwords')
+nltk.download('SnowballStemmer')
 
 ## Regelbaserad ai som räknar maskulina ord (2 st.)
 def testa_annons(annons):
