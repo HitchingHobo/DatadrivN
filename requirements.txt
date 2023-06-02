@@ -1,6 +1,5 @@
 scikit-learn
-nltk.corpus
-nltk.tokenize
+
 collections
 pandas
 itertools
