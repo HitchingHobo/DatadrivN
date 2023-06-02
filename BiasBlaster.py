@@ -7,7 +7,7 @@ from streamlit_lottie import st_lottie
 import requests 
 
 
-logo = Image.open('Logo.png')
+#logo = Image.open('Logo.png')
 
 def load_lottieurl(url):
     r = requests.get(url)
@@ -21,7 +21,7 @@ lottie_celebrate = load_lottieurl('https://assets5.lottiefiles.com/packages/lf20
 df = pd.read_csv('Final_output_sve.csv')
 st.set_page_config(page_title='BiasBlaster | by MindMakers', page_icon='', layout='centered')
 
-st.image(logo)
+#st.image(logo)
 
 st.write('')
 st.write('')
