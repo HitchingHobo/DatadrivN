@@ -3,3 +3,4 @@ altair
 streamlit_lottie
 requests
 scikit-learn
+nltk
