@@ -1,0 +1,10 @@
+sklearn
+nltk
+collections
+pandas
+itertools
+lemmy
+streamlit
+altair
+streamlit_lottie
+requests
