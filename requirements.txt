@@ -2,3 +2,4 @@ lemmy
 altair
 streamlit_lottie
 requests
+scikit-learn
