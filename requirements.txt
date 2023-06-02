@@ -1,4 +1,3 @@
-collections
 pandas
 itertools
 lemmy
