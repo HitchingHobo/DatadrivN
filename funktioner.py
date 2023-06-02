@@ -11,6 +11,7 @@ import pickle
 import lemmy
 import math
 import re
+import nltk
 
 nltk.download('stopwords')
 nltk.download('SnowballStemmer')
